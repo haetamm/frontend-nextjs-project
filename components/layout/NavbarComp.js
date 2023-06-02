@@ -12,8 +12,8 @@ import DropdownComp from './DropdownComp';
 const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) => {
     
     return (
-        <nav role="navigation" className={`bg-white md:block hidden fixed w-full transition-shadow duration-300 ${scrolledNav ? 'shadow-md bg-blue-300' : ''}`} onScroll={showShadow}>
-            <div className="mx-auto container px-8 py-0 hidden md:block">
+        <nav role="navigation" className={`md:block hidden fixed w-full transition-shadow duration-300 ${scrolledNav ? 'shadow-md bg-white' : ''}`} onScroll={showShadow}>
+            <div className="mx-auto container px-8 py-2 hidden md:block">
                 <div className="flex items-center justify-between">
                     <div className="inset-y-0 left-0 flex items-center xl:hidden">
                         <div className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-100 focus:outline-none transition duration-150 ease-in-out">
@@ -79,25 +79,25 @@ const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) =
                     </button>
                     <div className="flex">
                         <div className="hidden md:flex md:mr-6 xl:mr-16">
-                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:shadow-md focus:outline-none transition duration-150 ease-in-out">
                                 <span className="mr-2">
                                     <MdOutlineDashboardCustomize />
                                 </span>
                                 Dashboard
                             </a>
-                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:shadow-md focus:outline-none transition duration-150 ease-in-out">
                                 <span className="mr-2">
                                     <GiPuzzle />
                                 </span>
                                 Products
                             </a>
-                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:shadow-md focus:outline-none transition duration-150 ease-in-out">
                                 <span className="mr-2">
                                     <AiOutlineCompass />
                                 </span>
                                 Performance
                             </a>
-                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
+                            <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:shadow-md focus:outline-none transition duration-150 ease-in-out">
                                 <span className="mr-2">
                                     <BsCodeSlash />
                                 </span>
@@ -106,7 +106,7 @@ const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) =
                         </div>
                         <div className="hidden md:flex items-center">
                             <div className="relative hidden xl:block md:mr-6 my-2">
-                                <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:text-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Manage</button>
+                                <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:text-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Login</button>
                             </div>
                             <div className="ml-6 relative">
                                 <button aria-label="dropdown" onClick={showDropdown} className="focus:outline-none border-b-2 border-transparent focus:border-indigo-700 py-2 focus:text-indigo-700 text-gray-600 hover:text-indigo-700 flex items-center relative">

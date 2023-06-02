@@ -23,13 +23,13 @@ const NavComp = ({ children, scrolled, handleScroll }) => {
 
         
             <div className='py-6 px-6 w-full flex md:hidden justify-between items-center bg-transparent top-0 z-40'></div>
-            <div className={`py-4 px-6 w-full flex md:hidden justify-between items-center bg-white top-0 z-40 fixed ${scrolled ? 'shadow-md bg-blue-300' : ''}`} onScroll={handleScroll}>
+            <div className={`py-4 px-6 w-full flex md:hidden justify-between items-center top-0 z-40 fixed ${scrolled ? 'shadow-md bg-white' : ''}`} onScroll={handleScroll}>
                 <div aria-label="logo" role="img" tabIndex="0" className="focus:outline-none w-24">
                     <GiWorld />
                 </div>
                 <div className="flex items-center">
                     <div className="relative mr-6">
-                        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Manage</button>
+                        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Login</button>
                     </div>
                     <button id="menu" onClick={toggleSidebar}  aria-label="open menu" className="focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md text-gray-800">
                         <AiOutlineMenu />
