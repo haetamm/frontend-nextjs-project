@@ -6,6 +6,7 @@ import { BsCodeSlash } from 'react-icons/bs';
 import { AiOutlineCompass, AiOutlineClose } from 'react-icons/ai';
 import { TiMessages } from 'react-icons/ti';
 import { IoIosNotificationsOutline } from 'react-icons/io';
+import Link from 'next/link';
 
 const SIdebarComp = ({ showSIdebar }) => {
   return (
@@ -18,10 +19,10 @@ const SIdebarComp = ({ showSIdebar }) => {
                         <div>
                             <div className="mt-6 flex w-full items-center justify-between">
                                 <div className="flex items-center justify-between w-full">
-                                    <div className="flex items-center">
+                                    <Link href={'/'} className="flex items-center">
                                         <GiWorld size={20}/>
                                         <p tabIndex="0" className="focus:outline-none text-base md:text-2xl text-gray-800 ml-3">The North</p>
-                                    </div>
+                                    </Link>
                                     <button id="cross" onClick={showSIdebar} aria-label="close menu" className="focus:outline-none focus:ring-2 rounded-md text-gray-800">
                                         <AiOutlineClose />
                                     </button>

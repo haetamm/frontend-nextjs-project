@@ -8,6 +8,7 @@ import { CgProfile } from 'react-icons/cg';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { CiSettings } from 'react-icons/ci';
 import DropdownComp from './DropdownComp';
+import Link from 'next/link';
 
 const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) => {
     
@@ -71,12 +72,12 @@ const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) =
                             </div>
                         </div>
                     </div>
-                    <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-md hidden xl:flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
+                    <Link href={'/'} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-md hidden xl:flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
                         <div className="flex items-center">
                             <GiWorld size={44}/>
                             <h2 className="hidden sm:block text-base text-gray-700 font-bold leading-normal px-3">The North</h2>
                         </div>
-                    </button>
+                    </Link>
                     <div className="flex">
                         <div className="hidden md:flex md:mr-6 xl:mr-16">
                             <a href="#" className="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-3 text-sm leading-5 text-gray-700 hover:shadow-md focus:outline-none transition duration-150 ease-in-out">
@@ -105,9 +106,12 @@ const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) =
                             </a>
                         </div>
                         <div className="hidden md:flex items-center">
-                            <div className="relative hidden xl:block md:mr-6 my-2">
+                            <Link href={'/guest/login'} className="relative hidden md:block md:mr-6 my-2">
                                 <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:text-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Login</button>
-                            </div>
+                            </Link>
+                            <Link href={'/guest/register'} className="relative hidden md:block md:mr-6 my-2">
+                                <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:text-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Register</button>
+                            </Link>
                             <div className="ml-6 relative">
                                 <button aria-label="dropdown" onClick={showDropdown} className="focus:outline-none border-b-2 border-transparent focus:border-indigo-700 py-2 focus:text-indigo-700 text-gray-600 hover:text-indigo-700 flex items-center relative">
                                     {toggleDropdown && 

@@ -1,8 +1,24 @@
 import NavComp from './NavComp';
 import HeadComp from './HeadComp';
 import FooterComp from './FooterComp';
+import { useState, useEffect } from 'react';
 
-const index = ({ children, scrolled, handleScroll }) => {
+
+const Index = ({ children }) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setScrolled(scrollTop > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className='bg-slate-200'>
         <HeadComp />
@@ -16,4 +32,4 @@ const index = ({ children, scrolled, handleScroll }) => {
   )
 }
 
-export default index
+export default Index

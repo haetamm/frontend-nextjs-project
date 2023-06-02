@@ -3,6 +3,7 @@ import { GiWorld } from 'react-icons/gi';
 import { AiOutlineMenu } from 'react-icons/ai';
 import SIdebarComp from './SIdebarComp';
 import NavbarComp from './NavbarComp';
+import Link from 'next/link';
 
 const NavComp = ({ children, scrolled, handleScroll }) => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -28,9 +29,12 @@ const NavComp = ({ children, scrolled, handleScroll }) => {
                     <GiWorld />
                 </div>
                 <div className="flex items-center">
-                    <div className="relative mr-6">
+                    <Link href={'/guest/login'} className="relative mr-6">
                         <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Login</button>
-                    </div>
+                    </Link>
+                    <Link href={'/guest/register'} className="relative mr-6">
+                        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Register</button>
+                    </Link>
                     <button id="menu" onClick={toggleSidebar}  aria-label="open menu" className="focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md text-gray-800">
                         <AiOutlineMenu />
                     </button>
