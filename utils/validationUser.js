@@ -25,6 +25,20 @@ export const useForm = () => {
     setShowPassword((ShowPassword) => !ShowPassword);
   };
 
+  const handleErrorResponse = (errorResponse) => {
+    const newErrorMessages = { ...errorMessages };
+  
+    errorResponse.errors.forEach((error) => {
+        if (error.path === "username") {
+            newErrorMessages.username = error.msg;
+        } else if (error.path === "password") {
+            newErrorMessages.password = error.msg;
+        }
+    });
+  
+    setErrorMessages(newErrorMessages);
+};
+
   return {
     isFormValid,
     showPassword,
@@ -34,7 +48,8 @@ export const useForm = () => {
     errorMessages,
     setIsFormValid,
     handleInputChange,
-    toggleShowPassword
+    toggleShowPassword,
+    handleErrorResponse
   };
 };
 
@@ -94,5 +109,5 @@ export const validateField = (fieldName, value, formData, setErrorMessages, setI
             setIsFormValid(formData.username.length >= 3);
         }
     }
-  };
+};
   

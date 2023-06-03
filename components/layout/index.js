@@ -4,7 +4,8 @@ import FooterComp from './FooterComp';
 import { useState, useEffect } from 'react';
 
 
-const Index = ({ children }) => {
+
+const Index = ({ children, siteTitle, siteDescription }) => {
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
@@ -21,7 +22,7 @@ const Index = ({ children }) => {
 
   return (
     <div className='bg-slate-200'>
-        <HeadComp />
+        <HeadComp siteTitle={siteTitle} siteDescription={siteDescription}/>
         <NavComp scrolled={scrolled} handleScroll={handleScroll} >
           <div className='container mx-auto'>
             {children}    
