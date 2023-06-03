@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { GiWorld } from 'react-icons/gi';
 import { AiOutlineMenu } from 'react-icons/ai';
 import SIdebarComp from './SIdebarComp';
 import NavbarComp from './NavbarComp';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import DropdownComp from './DropdownComp';
+import { BiChevronDown } from 'react-icons/bi';
 
 const NavComp = ({ children, scrolled, handleScroll }) => {
+    const router = useRouter();
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
@@ -30,10 +35,10 @@ const NavComp = ({ children, scrolled, handleScroll }) => {
                 </div>
                 <div className="flex items-center">
                     <Link href={'/guest/login'} className="relative mr-6">
-                        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Login</button>
+                        <button className={` ${router.pathname == "/guest/login" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Login</button>
                     </Link>
                     <Link href={'/guest/register'} className="relative mr-6">
-                        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Register</button>
+                        <button className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Register</button>
                     </Link>
                     <button id="menu" onClick={toggleSidebar}  aria-label="open menu" className="focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md text-gray-800">
                         <AiOutlineMenu />
