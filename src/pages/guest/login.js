@@ -1,21 +1,24 @@
 import Layout from '../../../components/layout';
-import SponsorComp from '../../../components/home/SponsorComp';
+import SponsorComp from '../../../components/landingPage/SponsorComp';
 import CounterpartComp from '../../../components/guest/CounterpartComp';
 import useBackgroundChange from '../../../utils/changeBackground';
 import { useRouter } from 'next/router';
 import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import { useEffect } from 'react';
 import endpoint from '../../../utils/api-endpoint';
+import { useDispatch } from 'react-redux'; 
+import Cookies from 'js-cookie';
+import cookieCutter from 'cookie-cutter';
 
 
 const LoginPage = () => {
     const siteTitle = 'Login | The North';
     const siteDescription = 'sit amet consectetur adipisicing elit. At similique itaque, error eum optio tempora aspernatur animi?';
-    const { isFormValid, showPassword, formData, errorMessages, handleInputChange, toggleShowPassword, setFormData, setErrorMessages, setIsFormValid, handleErrorResponse } = useForm();
     const router = useRouter();
+    const dispatch = useDispatch();
+
+    const { isFormValid, showPassword, formData, errorMessages, handleInputChange, toggleShowPassword, setFormData, setErrorMessages, setIsFormValid, handleErrorResponse } = useForm();
+
     const bgColor = useBackgroundChange('bg-gradient-to-tr from-blue-300 to-slate-300', 400);
 
     const handleSubmit = async (e) => {
@@ -23,9 +26,13 @@ const LoginPage = () => {
 
         if (isFormValid) {
             try {
-                const response = await endpoint.post('auth', formData);
+                const response = await endpoint.post('auth', formData, {
+                    withCredentials: true, 
+                });
                 
-                router.push('/');        
+                localStorage.setItem('loginSuccess', formData.username);
+                dispatch({ type: 'LOGIN' });
+                router.push('/home');        
                 setFormData({
                     username: '',
                     password: ''
@@ -60,21 +67,12 @@ const LoginPage = () => {
         }
     };
 
-    useEffect(() => {
-        const registrationSuccess = localStorage.getItem('registrationSuccess');
     
-        if (registrationSuccess) {
-            toast.success(`Selamat ${registrationSuccess}! Silakan login!.`);
-            setTimeout(() => {
-                localStorage.removeItem('registrationSuccess');
-            }, 5000);
-        }
-    }, []);
 
     return (
-        <Layout siteTitle={siteTitle} siteDescription={siteDescription}>
+        <Layout guest={true} siteTitle={siteTitle} siteDescription={siteDescription}>
             <div className="h-full mt-10 mb-6 md:flex">
-                <ToastContainer />
+                
                 <CounterpartComp />
                 <FormComp
                     namePage='Login' 

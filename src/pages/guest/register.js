@@ -1,14 +1,11 @@
 import Layout from '../../../components/layout';
-import SponsorComp from '../../../components/home/SponsorComp';
+import SponsorComp from '../../../components/landingPage/SponsorComp';
 import CounterpartComp from '../../../components/guest/CounterpartComp';
 import useBackgroundChange from '../../../utils/changeBackground';
 import { useRouter } from 'next/router';
 import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
-
-
-
 
 
 const RegisterPage = () => {
@@ -18,15 +15,12 @@ const RegisterPage = () => {
     const router = useRouter();
     const bgColor = useBackgroundChange('bg-gradient-to-tr from-blue-300 to-slate-300', 400);
 
-    
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (isFormValid) {
             try {
                 const response = await endpoint.post('users', formData);
-                console.log(response.data.addedUser.username);
                 const client = response.data.addedUser.username
                 
                 localStorage.setItem('registrationSuccess', client);
@@ -51,7 +45,7 @@ const RegisterPage = () => {
     };
 
     return (
-        <Layout siteTitle={siteTitle} siteDescription={siteDescription}>
+        <Layout guest={true} siteTitle={siteTitle} siteDescription={siteDescription}>
             <div className="h-full mt-10 mb-6 md:flex">
                 
                 <CounterpartComp />

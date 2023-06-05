@@ -4,8 +4,8 @@ const FormComp = ({ namePage, isFormValid, showPassword, formData, errorMessages
   return (
     <div className={`flex md:w-1/2 shadow-3xl justify-center py-10 items-center border-l-4 border-dashed ${bgColor} rounded-lg`}>
         <form className={bgColor} onSubmit={handleSubmit}>
-            <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello !</h1>
-            <p className="text-sm font-normal text-gray-600 mb-7">Squy Register</p>
+            <h1 className="text-gray-800 font-bold text-2xl mb-1">{ namePage === 'Register' ? 'Hello!' : ' Hello Again!'}</h1>
+            <p className="text-sm font-normal text-gray-600 mb-7">{ namePage === 'Register' ? 'Squy register' :'Squy login'}</p>
             
             <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none"

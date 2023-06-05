@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { CiSettings } from 'react-icons/ci';
