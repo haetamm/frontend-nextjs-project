@@ -6,20 +6,28 @@ import { useRouter } from 'next/router';
 import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
-import { useDispatch } from 'react-redux'; 
-import Cookies from 'js-cookie';
-import cookieCutter from 'cookie-cutter';
+import { useContext, useEffect } from 'react';
+import AuthContext from '../../../utils/AuthContext';
+
+
 
 
 const LoginPage = () => {
     const siteTitle = 'Login | The North';
     const siteDescription = 'sit amet consectetur adipisicing elit. At similique itaque, error eum optio tempora aspernatur animi?';
     const router = useRouter();
-    const dispatch = useDispatch();
 
     const { isFormValid, showPassword, formData, errorMessages, handleInputChange, toggleShowPassword, setFormData, setErrorMessages, setIsFormValid, handleErrorResponse } = useForm();
 
     const bgColor = useBackgroundChange('bg-gradient-to-tr from-blue-300 to-slate-300', 400);
+
+    const { loggedIn } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (loggedIn) {
+            router.push('/home');
+        }
+    }, [loggedIn, router]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,10 +36,10 @@ const LoginPage = () => {
             try {
                 const response = await endpoint.post('auth', formData, {
                     withCredentials: true, 
-                });
+                });                
                 
                 localStorage.setItem('loginSuccess', formData.username);
-                dispatch({ type: 'LOGIN' });
+                router.reload();
                 router.push('/home');        
                 setFormData({
                     username: '',
@@ -71,8 +79,7 @@ const LoginPage = () => {
 
     return (
         <Layout guest={true} siteTitle={siteTitle} siteDescription={siteDescription}>
-            <div className="h-full mt-10 mb-6 md:flex">
-                
+            <div className="h-full mt-10 mb-6 md:flex">       
                 <CounterpartComp />
                 <FormComp
                     namePage='Login' 

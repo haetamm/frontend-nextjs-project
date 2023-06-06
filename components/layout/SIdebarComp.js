@@ -8,11 +8,13 @@ import { AiOutlineCompass, AiOutlineClose } from 'react-icons/ai';
 import { TiMessages } from 'react-icons/ti';
 import { IoIosNotificationsOutline } from 'react-icons/io';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import AuthContext from '../../utils/AuthContext';
+import { useContext } from 'react';
 
 const SIdebarComp = ({ showSIdebar }) => {
-    const isLoggedIn = useSelector(state => state.isLoggedIn);
+    // const isLoggedIn = useSelector(state => state.isLoggedIn);
+    const { loggedIn } = useContext(AuthContext);
     const router = useRouter();
     return (
         <>
@@ -95,7 +97,7 @@ const SIdebarComp = ({ showSIdebar }) => {
                                         <input className="focus:ring-2 focus:ring-gray-600 bg-gray-100 focus:outline-none rounded w-full text-sm text-gray-500 pl-10 py-2" type="text" placeholder="Search" />
                                     </div>
                                 </div>
-                                { isLoggedIn &&
+                                { loggedIn &&
                                     <div className="border-t border-gray-300">
                                         <div className="w-full flex items-center justify-between pt-1">
                                             <div className="flex items-center">

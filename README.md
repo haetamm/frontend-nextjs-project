@@ -1,8 +1,12 @@
 # Project Nextjs | Tailwind
 
-Backend => https://github.com/THaetami/expressjs-typescript-api
+Backend => https://github.com/THaetami/expressjs-typescript-api/tree/exploration1
 
 run the development server:
+
+```sh
+npm install
+```
 
 ```bash
 npm run dev

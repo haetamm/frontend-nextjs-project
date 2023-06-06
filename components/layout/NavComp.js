@@ -5,13 +5,17 @@ import SIdebarComp from './SIdebarComp';
 import NavbarComp from './NavbarComp';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
 import endpoint from '../../utils/api-endpoint';
+import AuthContext from '../../utils/AuthContext';
+import { useContext } from 'react';
+
 
 const NavComp = ({ children, scrolled, handleScroll, guest }) => {
     const router = useRouter();
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+
+    const { loggedIn } = useContext(AuthContext);
 
     const toggleSidebar = () => {
         setIsOpenSidebar(!isOpenSidebar);
@@ -21,14 +25,10 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
         setIsOpenDropdown(!isOpenDropdown);
     };
 
-    const isLoggedIn = useSelector(state => state.isLoggedIn);
-    const dispatch = useDispatch();
-
     const handleLogout = async () => {
         try {
             const response = await endpoint.delete('auth');
-            console.log(response);
-            dispatch({ type: 'LOGOUT' });
+            router.reload();
         } catch (error) {
             console.log(error)
         }
@@ -38,7 +38,7 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
         <div className=" w-full">
             {guest &&
                 <>
-                    <NavbarComp showDropdown={toggleDropdown} toggleDropdown={isOpenDropdown} scrolledNav={scrolled} showShadow={handleScroll}/>
+                    <NavbarComp showDropdown={toggleDropdown} handleLogout={handleLogout} toggleDropdown={isOpenDropdown} scrolledNav={scrolled} showShadow={handleScroll}/>
                     <div className='mx-auto container px-8 py-8 hidden md:block bg-transparent'></div>
                 
                 </>
@@ -50,7 +50,7 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
                     <GiWorld className='hidden md:block'/>
                 </div>
                 <div className="flex items-center">
-                    { isLoggedIn === false ? (
+                    { !loggedIn ? (
                         <>
                             <Link href={'/guest/login'} className="relative mr-6">
                                 <button className={` ${router.pathname == "/guest/login" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Login</button>
@@ -60,9 +60,9 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
                             </Link> 
                         </>
                         ) : (
-                            <Link href={'/guest/register'} className="relative mr-6">
-                                <button onClick={handleLogout} className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Logout</button>
-                            </Link>
+                            <span className="relative mr-6">
+                                <button onClick={handleLogout} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 py-2 text-xs`}>Logout</button>
+                            </span>
                         )
                     }
                     

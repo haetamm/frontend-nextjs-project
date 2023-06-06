@@ -53,7 +53,7 @@ const FormComp = ({ namePage, isFormValid, showPassword, formData, errorMessages
                 <span className="ml-1 text-gray-400">Show Password</span>
             </label>
 
-            <button type="submit" disabled={!isFormValid} className="block w-full bg-indigo-600 mt-2 py-2 rounded-2xl text-white font-semibold mb-2">{namePage}</button>
+            <button type="submit" disabled={!isFormValid} className={`${!isFormValid ? 'select-none': 'cursor-pointer' }block w-full bg-indigo-600 mt-2 py-2 rounded-2xl text-white font-semibold mb-2`}>{namePage}</button>
             { namePage === 'Register' ? (
                 <span className="text-sm ml-2">
                     Have an account already? 

@@ -8,18 +8,13 @@ import { AiOutlineCompass } from 'react-icons/ai';
 import DropdownComp from './DropdownComp';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
+import AuthContext from '../../utils/AuthContext';
+import { useContext } from 'react';
 
-const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) => {
+
+const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow, handleLogout }) => {
     const router = useRouter();
-
-    const isLoggedIn = useSelector(state => state.isLoggedIn);
-    const dispatch = useDispatch();
-
-    const handleLogout = () => {
-        dispatch({ type: 'LOGOUT' });
-    };
-
+    const { loggedIn } = useContext(AuthContext);
     
     return (
         <nav role="navigation" className={`md:block hidden fixed w-full transition-shadow duration-300 ${scrolledNav ? 'shadow-md bg-white' : ''}`} onScroll={showShadow}>
@@ -60,42 +55,44 @@ const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow }) =
                             </a>
                         </div>
                         <div className="hidden md:flex items-center">
-                        { isLoggedIn === false ? (
-                            <>
-                                <Link href={'/guest/login'} className="relative mr-6">
-                                    <button className={` ${router.pathname == "/guest/login" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Login</button>
-                                </Link>
-                                <Link href={'/guest/register'} className="relative mr-6">
-                                    <button className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Register</button>
-                                </Link> 
-                            </>
-                            ) : (
-                            <>
-                                <Link href={'/guest/register'} className="relative mr-6">
-                                    <button onClick={handleLogout} className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Logout</button>
-                                </Link>
-                                <div className="ml-6 relative">
-                                    <button aria-label="dropdown" onClick={showDropdown} className="focus:outline-none border-b-2 border-transparent focus:border-indigo-700 py-2 focus:text-indigo-700 text-gray-600 hover:text-indigo-700 flex items-center relative">
-                                        {toggleDropdown && 
-                                            <DropdownComp />
-                                        }
-                                        <div className="cursor-pointer text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                            <Image
-                                                priority
-                                                src="/image/profile.jpg"
-                                                className='rounded h-10 w-10 object-cover'
-                                                height={48}
-                                                width={48}
-                                                alt="dafault"
-                                            />
-                                        </div>
-                                        <div className="ml-1">
-                                            <BiChevronDown size={22} />
-                                        </div>
-                                    </button>
-                                </div>
-                            </>
-                            )
+                        { !loggedIn ? (
+                                <>
+                                    <Link href={'/guest/login'} className="relative mr-6">
+                                        <button className={` ${router.pathname == "/guest/login" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Login</button>
+                                    </Link>
+                                    <Link href={'/guest/register'} className="relative mr-6">
+                                        <button className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Register</button>
+                                    </Link> 
+                                </>
+
+                                ) : ( 
+                                <>
+                                    <span className="relative mr-6">
+                                        <button onClick={handleLogout} className={` bg-red-300 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-black focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 py-2 text-xs`}>Logout</button>
+                                    </span>
+                                    <div className="ml-6 relative">
+                                        <button aria-label="dropdown" onClick={showDropdown} className="focus:outline-none border-b-2 border-transparent focus:border-indigo-700 py-2 focus:text-indigo-700 text-gray-600 hover:text-indigo-700 flex items-center relative">
+                                            {toggleDropdown && 
+                                                <DropdownComp />
+                                            }
+                                            <div className="cursor-pointer text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out">
+                                                <Image
+                                                    priority
+                                                    src="/image/profile.jpg"
+                                                    className='rounded h-10 w-10 object-cover'
+                                                    height={48}
+                                                    width={48}
+                                                    alt="dafault"
+                                                />
+                                            </div>
+                                            <div className="ml-1">
+                                                <BiChevronDown size={22} />
+                                            </div>
+                                        </button>
+                                    </div>
+                                    
+                                </>
+                                )
                         }
                         </div>
                     </div>
