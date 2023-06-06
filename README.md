@@ -2,11 +2,12 @@
 
 Backend => https://github.com/THaetami/expressjs-typescript-api/tree/exploration1
 
-run the development server:
-
+## project setup
 ```sh
 npm install
 ```
+
+run the development server:
 
 ```bash
 npm run dev
