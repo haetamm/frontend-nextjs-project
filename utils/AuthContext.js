@@ -4,7 +4,7 @@ import endpoint from './api-endpoint';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,12 +12,12 @@ export function AuthProvider({ children }) {
         const response = await endpoint.get('auth');
 
         if (response.status === 200) {
-          setLoggedIn(true);
+          setLoggedIn(response.data);
         } else {
-          setLoggedIn(false);
+          setLoggedIn(null);
         }
       } catch (error) {
-        setLoggedIn(false);
+        setLoggedIn(null);
       }
     };
 

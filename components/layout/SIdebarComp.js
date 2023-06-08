@@ -13,7 +13,6 @@ import AuthContext from '../../utils/AuthContext';
 import { useContext } from 'react';
 
 const SIdebarComp = ({ showSIdebar }) => {
-    // const isLoggedIn = useSelector(state => state.isLoggedIn);
     const { loggedIn } = useContext(AuthContext);
     const router = useRouter();
     return (
@@ -103,13 +102,13 @@ const SIdebarComp = ({ showSIdebar }) => {
                                             <div className="flex items-center">
                                                 <Image
                                                     priority
-                                                    src="/image/profile.jpg"
+                                                    src="/image/noimage.png"
                                                     className='rounded h-10 w-10 object-cover'
                                                     height={48}
                                                     width={48}
                                                     alt="default"
                                                 />
-                                                <p tabIndex="0" className="focus:outline-none text-gray-800 text-base leading-4 ml-2">Jane Doe</p>
+                                                <p tabIndex="0" className="focus:outline-none text-gray-800 text-base leading-4 ml-2">{loggedIn.user.username}</p>
                                             </div>
                                             <ul className="flex">
                                                 <li className="cursor-pointer text-gray-800 pt-5 pb-3">

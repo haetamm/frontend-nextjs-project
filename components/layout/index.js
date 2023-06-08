@@ -17,15 +17,10 @@ const Index = ({ children, siteTitle, siteDescription, guest }) => {
       notificationHelper(
         `Selamat ${localStorage.getItem('registrationSuccess')}, Silakan login!.`,
         'registrationSuccess'
-      ) ||
-      notificationHelper(
-        `Selamat datang ${localStorage.getItem('loginSuccess')}!`,
-        'loginSuccess'
       );
   
     if (notificationShown) {
       localStorage.removeItem('registrationSuccess');
-      localStorage.removeItem('loginSuccess');
     }
   }, []);
 
@@ -46,7 +41,7 @@ const Index = ({ children, siteTitle, siteDescription, guest }) => {
         />
         <HeadComp siteTitle={siteTitle} siteDescription={siteDescription}/>
         <NavComp guest={guest} scrolled={scrolled} handleScroll={useScrollHandler} >
-          <div className={` ${!loggedIn ? 'container mx-auto' : 'w-full xl:w-[1350px] 2xl:mx-auto'}`}>
+          <div className={` ${!loggedIn ? 'container mx-auto mt-2' : 'w-full xl:w-[1350px] 2xl:mx-auto'}`}>
             {children}    
           </div>
         </NavComp>

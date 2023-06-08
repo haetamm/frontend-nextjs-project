@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import endpoint from '../../utils/api-endpoint';
 import AuthContext from '../../utils/AuthContext';
 import { useContext } from 'react';
+import handleLogout from '../../utils/handleLogout';
 
 
 const NavComp = ({ children, scrolled, handleScroll, guest }) => {
@@ -25,20 +26,15 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
         setIsOpenDropdown(!isOpenDropdown);
     };
 
-    const handleLogout = async () => {
-        try {
-            const response = await endpoint.delete('auth');
-            router.reload();
-        } catch (error) {
-            console.log(error)
-        }
+    const handleLogoutClick = async () => {
+        await handleLogout(router);
     };
 
     return (
         <div className=" w-full">
             {guest &&
                 <>
-                    <NavbarComp showDropdown={toggleDropdown} handleLogout={handleLogout} toggleDropdown={isOpenDropdown} scrolledNav={scrolled} showShadow={handleScroll}/>
+                    <NavbarComp showDropdown={toggleDropdown} handleLogout={handleLogoutClick} toggleDropdown={isOpenDropdown} scrolledNav={scrolled} showShadow={handleScroll}/>
                     <div className='mx-auto container px-8 py-8 hidden md:block bg-transparent'></div>
                 
                 </>
@@ -61,7 +57,7 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
                         </>
                         ) : (
                             <span className="relative mr-6">
-                                <button onClick={handleLogout} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 py-2 text-xs`}>Logout</button>
+                                <button onClick={handleLogoutClick} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 py-2 text-xs`}>Logout</button>
                             </span>
                         )
                     }

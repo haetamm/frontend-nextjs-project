@@ -19,9 +19,9 @@ const RegisterPage = () => {
 
     const { loggedIn } = useContext(AuthContext);
     useEffect(() => {
-    if (loggedIn) {
-        router.push('/home');
-    }
+        if (loggedIn) {
+            router.push('/home');
+        }
     }, [loggedIn, router]);
     
     const handleSubmit = async (e) => {
@@ -55,11 +55,10 @@ const RegisterPage = () => {
 
     return (
         <Layout guest={true} siteTitle={siteTitle} siteDescription={siteDescription}>
-            <div className="h-full mt-10 mb-6 md:flex">
-                
+            <div className="h-full mt-10 md:flex">
                 <CounterpartComp />
                 <FormComp 
-                    namePage='Register'
+                    namePage='Sign Up'
                     isFormValid={isFormValid} 
                     showPassword={showPassword} 
                     formData={formData} 

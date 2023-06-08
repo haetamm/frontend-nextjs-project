@@ -78,7 +78,7 @@ const NavbarComp = ({ showDropdown, toggleDropdown, scrolledNav, showShadow, han
                                             <div className="cursor-pointer text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out">
                                                 <Image
                                                     priority
-                                                    src="/image/profile.jpg"
+                                                    src="/image/noimage.png"
                                                     className='rounded h-10 w-10 object-cover'
                                                     height={48}
                                                     width={48}

@@ -38,7 +38,8 @@ const CarouselComp = () => {
                             aria-hidden="true"
                             hidden=""
                             checked={index === activeIndex}
-                            onChange={() => handleRadioChange(index)}/>
+                            onChange={() => handleRadioChange(index)}
+                        />
                         <div className={`container mx-auto p-0.5 md:p-4 shadow-lg rounded-sm lg:rounded-2xl ${carouselStyles.carouselItem}`}>
                             <img src={image} alt={`Carousel ${index + 1}`} className='rounded-sm lg:rounded-2xl shadow-md'/>
                         </div>

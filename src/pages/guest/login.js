@@ -40,7 +40,7 @@ const LoginPage = () => {
                 
                 localStorage.setItem('loginSuccess', formData.username);
                 router.reload();
-                router.push('/home');        
+                router.push('/home?page=1');        
                 setFormData({
                     username: '',
                     password: ''
@@ -79,10 +79,10 @@ const LoginPage = () => {
 
     return (
         <Layout guest={true} siteTitle={siteTitle} siteDescription={siteDescription}>
-            <div className="h-full mt-10 mb-6 md:flex">       
+            <div className="h-full mt-10 md:flex">       
                 <CounterpartComp />
                 <FormComp
-                    namePage='Login' 
+                    namePage='Sign In' 
                     isFormValid={isFormValid} 
                     showPassword={showPassword} 
                     formData={formData} 

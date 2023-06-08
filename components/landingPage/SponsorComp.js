@@ -2,7 +2,7 @@ import style from '../../src/styles/welcomcomp.module.css';
 
 const SponsorComp = () => {
   return (
-    <section className="bg-slate-350 dark:bg-gray-900 mt-10">
+    <section className="bg-slate-350 dark:bg-gray-900 mt-[3rem] mb-[2rem]">
         <div className="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-16">
             <div className="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 sm:grid-cols-3 lg:grid-cols-6 dark:text-gray-400">
                 <a href="#" className="flex items-center lg:justify-center">
