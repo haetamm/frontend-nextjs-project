@@ -38,7 +38,7 @@ const HomePage = ({ data, totalPages }) => {
               </div>
               {data && data.length > 0 ? (
                 <>
-                  <div className='text-center mt-[6rem] justify-center flex text-md mb-3 text-gray-800 text-lg'>
+                  <div className='text-center mt-[6rem] justify-center grid-cols-5 flex text-md mb-3 text-gray-800 text-lg'>
                     {renderPagination()}
                   </div>
                 </>

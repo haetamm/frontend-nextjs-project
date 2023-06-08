@@ -46,7 +46,7 @@ const usePagination = (totalPages) => {
         <li key="previous" className="mx-1 p-1">
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
-            className="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded"
+            className="py-2 ml-1 px-4 border-2 rounded-sm bg-blue-300"
           >
             &lt;
           </button>
@@ -56,10 +56,10 @@ const usePagination = (totalPages) => {
 
     for (let i = startPage; i <= endPage; i++) {
       pages.push(
-        <li key={i} className={`mx-1 p-1 ${currentPage === i ? 'font-bold text-black' : 'text-white'}`}>
+        <li key={i} className={` p-1 ${currentPage === i ? 'font-bold text-black' : 'text-black'}`}>
           <button
             onClick={() => handlePageChange(i)}
-            className="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded"
+            className=" py-2 ml-1 px-4 border-2 rounded-sm bg-blue-300"
           >
             {i}
           </button>
@@ -72,7 +72,7 @@ const usePagination = (totalPages) => {
         <li key="next" className="mx-1 p-1">
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
-            className="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded"
+            className=" py-2 ml-1 px-4 border-2 rounded-sm bg-blue-300"
           >
             &#62;
           </button>
