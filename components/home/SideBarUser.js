@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import handleLogout from '../../utils/handleLogout';
 import DropdownUser from './DropdownUser';
+import {IoMdNotifications} from 'react-icons/io';
 
 
 const SideBarUser = () => {
@@ -16,10 +17,10 @@ const SideBarUser = () => {
     };
 
     return (
-        <div className="border-r-3 border-black flex w-0 shrink-0 transition-opacity duration-200 xs:w-20 md:w-24 lg:max-w-none xl:-mr-0 xl:w-full xl:max-w-[18rem] 2xl:justify-end">
-            <div className="fixed bottom-0 z-10 flex w-full flex-col justify-between bg-main-background py-0 dark:border-dark-border xs:top-0 xs:h-full xs:w-auto xs:border-0 bg-white xs:px-2 xs:py-3 xs:pt-2 md:px-4 xl:w-72">
+        <div className="flex w-0 shrink-0 transition-opacity duration-200 xs:w-20 md:w-24 lg:max-w-none xl:-mr-0 xl:w-full xl:max-w-[18rem] 2xl:justify-end">
+            <div className="fixed bottom-0 z-10 flex w-full flex-col justify-between bg-main-background py-0 xs:top-0 xs:h-full xs:w-auto xs:border-0 bg-black xs:px-2 xs:py-3 xs:pt-2 md:px-4 xl:w-72">
 
-                <div className="flex flex-col justify-center gap-2 xs:items-center xl:items-stretch">
+                <div className="flex flex-col mt-0 xs:mt-10 md:mt-0 justify-center gap-2 xs:items-center xl:items-stretch">
                     <h1 className="hidden md:flex">
                         <a className="custom-button main-tab text-accent-blue transition hover:bg-light-primary/10 focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80 dark:text-twitter-icon dark:hover:bg-dark-primary/10">
                         </a>
@@ -27,7 +28,7 @@ const SideBarUser = () => {
 
                     <div className="flex items-center justify-around xs:flex-col xs:justify-center xl:block">
                         <Link href={'/home?page=1'} onClick={resetPage} className="group py-1 outline-none flex">
-                            <div className={`${router.pathname == "/home" ? "text-indigo-700 border-b-2" : "text-black"}custom-button flex items-center justify-center gap-4 self-start p-2 text-xl transition duration-200 group-hover:bg-light-primary/10 group-focus-visible:ring-2  group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10  dark:group-focus-visible:ring-white xs:p-3 xl:pr-5 font-bold`}>
+                            <div className={`${router.pathname == "/home" ? "text-indigo-700" : "text-white"} custom-button flex items-center justify-center gap-4 self-start p-2 text-xl xs:p-3 xl:pr-5`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-7 w-7">
                                     <path
                                         d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z">
@@ -40,7 +41,7 @@ const SideBarUser = () => {
                             </div>
                         </Link>
                         <Link href={'/'} className="group py-1 outline-none flex">
-                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl transition duration-200 group-hover:bg-light-primary/10 group-focus-visible:ring-2  group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 dark:group-focus-visible:ring-white xs:p-3 xl:pr-5">
+                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl text-white xs:p-3 xl:pr-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                                     stroke="currentColor" aria-hidden="true" className="h-7 w-7">
                                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -50,19 +51,14 @@ const SideBarUser = () => {
                             </div>
                         </Link>
                         <a href='#' className="py-1 outline-none flex cursor-not-allowed">
-                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl transition duration-200 group-hover:bg-light-primary/10 group-focus-visible:ring-2 group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10dark:group-focus-visible:ring-white xs:p-3 xl:pr-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                                    stroke="currentColor" aria-hidden="true" className="h-7 w-7">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0">
-                                    </path>
-                                </svg>
+                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl text-white xs:p-3 xl:pr-5">
+                                <IoMdNotifications className='h-7 w-7'/>
                                 <p className="hidden xl:block">Notifications</p>
                             </div>
                         </a>
                         <a href='#' className="group py-1 outline-none hidden xs:flex cursor-not-allowed group">
-                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl transition duration-200 group-hover:bg-light-primary/10 group-focus-visible:ring-2  group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10  dark:group-focus-visible:ring-white xs:p-3 xl:pr-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
+                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl text-white xs:p-3 xl:pr-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" strokeWidth="1.5"
                                     stroke="currentColor" aria-hidden="true" className="h-7 w-7">
                                     <path strokeLinecap="round" strokeLinejoin="round"
                                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z">
@@ -73,7 +69,7 @@ const SideBarUser = () => {
                         </a>
                     </div>
 
-                    <button className="cursor-pointer custom-button main-tab accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0 bg-blue-700 hover:text-red-700 rounded-full p-2 xl:w-11/12" type="button">
+                    <Link href={'/create'} className="cursor-pointer custom-button main-tab accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0 bg-blue-700 hover:text-red-700 rounded-full p-2 xl:w-11/12" type="button">
                         <svg className="fill-current block h-6 w-6 xl:hidden" viewBox="0 0 24 24" aria-hidden="true">
                             <g>
                                 <path
@@ -81,8 +77,8 @@ const SideBarUser = () => {
                                 </path>
                             </g>
                         </svg>
-                        <p className="hidden xl:block">Thread</p>
-                    </button>
+                        <p className="hidden xl:block text-center">Thread</p>
+                    </Link>
                 </div>
 
                 <DropdownUser handleLogout={handleLogoutClick}/>

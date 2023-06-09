@@ -4,6 +4,7 @@ import { AuthProvider } from '../../utils/AuthContext';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { notificationHelper } from '../../utils/notificationHelper';
+import '../../utils/diffforHumans';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {

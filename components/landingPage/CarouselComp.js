@@ -48,7 +48,7 @@ const CarouselComp = () => {
 
                 {images.map((_, index) => (
                     <label key={index}
-                        htmlFor={`carousel${index + 1}`}
+                        htmlforhtml={`carousel${index + 1}`}
                         className={`${carouselStyles.carouselControl} ${index === activeIndex ? `${carouselStyles.prev}`: `${carouselStyles.next}`} ${carouselStyles.carouselControl}${index % 3 + 1}}`}
                         >
                         {index === activeIndex ? '‹' : '›'}
@@ -59,7 +59,7 @@ const CarouselComp = () => {
                     {images.map((_, index) => (
                         <li key={index}>
                         <label
-                            htmlFor={`carousel${index + 1}`}
+                            htmlforhtml={`carousel${index + 1}`}
                             className={`${carouselStyles.carouselBullet}} ${index === activeIndex ? 'active' : ''}`}
                         >
                             o

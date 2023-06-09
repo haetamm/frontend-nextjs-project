@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const FormComp = ({ namePage, isFormValid, showPassword, formData, errorMessages, handleInputChange, toggleShowPassword, bgColor, handleSubmit }) => {
-  return (
+    return (
     <div className={`flex md:w-1/2 shadow-3xl justify-center py-10 items-center border-l-4 border-dashed ${bgColor} rounded-lg`}>
         <form className={bgColor} onSubmit={handleSubmit}>
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello</h1>

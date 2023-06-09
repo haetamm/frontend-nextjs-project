@@ -18,8 +18,8 @@ const HomePage = ({ data, totalPages }) => {
       <div className="flex w-full justify-center gap-0">
         {loggedIn && <SideBarUser />}
 
-        <div className="bg-white rounded-none xs:rounded-tl-[10rem] xs:rounded-tr-[10rem] hover-animation flex min-h-screen w-full max-w-full flex-col mx-auto border-x-0 border-light-border pb-[18rem] dark:border-dark-border xs:border-x">
-          <section className="bg-white py-6 sm:py-8">
+        <div className="bg-slate-200 rounded-none xs:rounded-tl-[10rem] xs:rounded-tr-[10rem] hover-animation flex min-h-screen w-full max-w-full flex-col mx-auto border-x-0 border-light-border pb-[18rem] dark:border-dark-border xs:border-x">
+          <section className="bg-slate-200 py-6 sm:py-8">
             <div className="mx-auto max-w-screen-xl px-4 md:px-8">
               <div className="mb-10 md:mb-20">
                 <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Most Recent Posts</h2>

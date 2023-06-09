@@ -33,6 +33,10 @@ export const useForm = () => {
             newErrorMessages.username = error.msg;
         } else if (error.path === "password") {
             newErrorMessages.password = error.msg;
+        } else if (error.path === "title") {
+            newErrorMessages.title = error.msg;
+        } else if (error.path === "body") {
+            newErrorMessages.body = error.msg;
         }
     });
   

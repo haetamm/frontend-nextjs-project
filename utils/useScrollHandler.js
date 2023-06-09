@@ -1,21 +1,30 @@
 import { useState, useEffect } from 'react';
 
-const useScrollHandler = () => {
-  const [scrolled, setScrolled] = useState(false);
+const useScroll = () => {
+  const isBrowser = typeof window !== 'undefined';
 
-  const handleScroll = () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    setScrolled(scrollTop > 0);
-  };
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [transparent, setTransparent] = useState(true);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    if (isBrowser) {
+      const handleScroll = () => {
+        const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        setVisible(prevScrollPos > currentScrollPos);
+        setTransparent(currentScrollPos <= 0);
+        setPrevScrollPos(currentScrollPos);
+      };
 
-  return scrolled;
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [isBrowser, prevScrollPos]);
+
+  return { prevScrollPos, visible, transparent };
 };
 
-export default useScrollHandler;
+export default useScroll;

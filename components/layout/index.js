@@ -4,11 +4,9 @@ import FooterComp from './FooterComp';
 import { useEffect, useContext } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { notificationHelper } from '../../utils/notificationHelper';
-import useScrollHandler from '../../utils/useScrollHandler';
 import AuthContext from '../../utils/AuthContext';
 
 const Index = ({ children, siteTitle, siteDescription, guest }) => {
-  const scrolled = useScrollHandler();
   const { loggedIn } = useContext(AuthContext);
   
 
@@ -20,7 +18,7 @@ const Index = ({ children, siteTitle, siteDescription, guest }) => {
       );
   
     if (notificationShown) {
-      localStorage.removeItem('registrationSuccess');
+      localStorage.removeItem('registrationSuccess') || localStorage.removeItem('addThreadSuccess');
     }
   }, []);
 
@@ -40,7 +38,7 @@ const Index = ({ children, siteTitle, siteDescription, guest }) => {
           theme="light"
         />
         <HeadComp siteTitle={siteTitle} siteDescription={siteDescription}/>
-        <NavComp guest={guest} scrolled={scrolled} handleScroll={useScrollHandler} >
+        <NavComp guest={guest}>
           <div className={` ${!loggedIn ? 'container mx-auto mt-2' : 'w-full xl:w-[1350px] 2xl:mx-auto'}`}>
             {children}    
           </div>

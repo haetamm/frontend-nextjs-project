@@ -5,18 +5,19 @@ import SIdebarComp from './SIdebarComp';
 import NavbarComp from './NavbarComp';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import endpoint from '../../utils/api-endpoint';
 import AuthContext from '../../utils/AuthContext';
 import { useContext } from 'react';
 import handleLogout from '../../utils/handleLogout';
+import useScroll from '../../utils/useScrollHandler';
 
 
-const NavComp = ({ children, scrolled, handleScroll, guest }) => {
+const NavComp = ({ children, guest }) => {
     const router = useRouter();
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
     const { loggedIn } = useContext(AuthContext);
+    const { visible, transparent } = useScroll();
 
     const toggleSidebar = () => {
         setIsOpenSidebar(!isOpenSidebar);
@@ -34,14 +35,14 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
         <div className=" w-full">
             {guest &&
                 <>
-                    <NavbarComp showDropdown={toggleDropdown} handleLogout={handleLogoutClick} toggleDropdown={isOpenDropdown} scrolledNav={scrolled} showShadow={handleScroll}/>
-                    <div className='mx-auto container px-8 py-8 hidden md:block bg-transparent'></div>
+                    <NavbarComp showDropdown={toggleDropdown} handleLogout={handleLogoutClick} toggleDropdown={isOpenDropdown} visible={visible} transparent={transparent}/>
+                    <div className={`mx-auto container px-8 py-8 hidden md:block bg-transparent`}></div>
                 
                 </>
             }
         
-            <div className='py-6 px-6 w-full flex md:hidden justify-between items-center bg-transparent top-0 z-40'></div>
-            <div className={`py-2 px-6 w-full flex md:hidden justify-between items-center top-0 z-40 fixed ${scrolled ? 'shadow-md bg-white' : ''}`} onScroll={handleScroll}>
+            <div className={`py-6 px-6 w-full flex md:hidden justify-between items-center bg-transparent top-0 z-40`}></div>
+            <div className={`py-2 px-6 w-full flex md:hidden justify-between items-center top-0 z-40 fixed navbar ${visible ? 'navbarCustom--visible' : 'navbarCustom--hidden'} ${transparent ? 'bg-black' : 'bg-black'}`}>
                 <div aria-label="logo" role="img" tabIndex="0" className="focus:outline-none w-24">
                     <GiWorld className='hidden md:block'/>
                 </div>
@@ -49,20 +50,20 @@ const NavComp = ({ children, scrolled, handleScroll, guest }) => {
                     { !loggedIn ? (
                         <>
                             <Link href={'/guest/login'} className="relative mr-6">
-                                <button className={` ${router.pathname == "/guest/login" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Login</button>
+                                <button className={` ${router.pathname == "/guest/login" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 text-md py-2`}>Login</button>
                             </Link>
                             <Link href={'/guest/register'} className="relative mr-6">
-                                <button className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs`}>Register</button>
+                                <button className={` ${router.pathname == "/guest/register" ? "text-red-500 font-bold bg-blue-700" : "bg-gray-100"} focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 text-md py-2`}>Register</button>
                             </Link> 
                         </>
                         ) : (
                             <span className="relative mr-6">
-                                <button onClick={handleLogoutClick} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 py-2 text-xs`}>Logout</button>
+                                <button onClick={handleLogoutClick} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 text-md py-1`}>Logout</button>
                             </span>
                         )
                     }
                     
-                    <button id="menu" onClick={toggleSidebar}  aria-label="open menu" className="focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md text-gray-800">
+                    <button id="menu" onClick={toggleSidebar}  aria-label="open menu" className="focus:outline-none bg-black p-1 focus:ring-2 focus:ring-gray-600 text-white">
                         <AiOutlineMenu />
                     </button>
                 </div>

@@ -7,7 +7,7 @@ import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
 import { useContext, useEffect } from 'react';
-import AuthContext from '../../../utils/AuthContext';
+import AuthContext from '../../../utils/AuthContext'; 
 
 
 const RegisterPage = () => {
