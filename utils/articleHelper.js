@@ -23,12 +23,16 @@ export function isoToWIB(isoTime) {
 }
 
 export function getOverview(body) {
-    if (body.length >= 20) {
-        return `${body.substring(0, 100)} ....`
-    } else {
-        return body
-    }
+  const strippedText = body.replace(/<[^>]+>/g, ''); // Menghapus tag HTML
+  const strippedTextWithoutLineBreaks = strippedText.replace(/(\r\n|\n|\r)/gm, ''); // Menghapus baris baru
+
+  if (strippedTextWithoutLineBreaks.length >= 30) {
+    return `${strippedTextWithoutLineBreaks.substring(0, 65)} ....`;
+  } else {
+    return strippedTextWithoutLineBreaks;
+  }
 }
+
 
 export const getInitialLikeColor = (data, loggedIn) => {
   if (data && data.likes && data.likes.length > 0 && loggedIn && data.likes.find((like) => like.user.id === loggedIn.user?.id)) {
@@ -54,4 +58,22 @@ export const useTextarea = () => {
     };
   
     return { textareaRef, textareaValue, setTextareaValue, handleTextareaChange, adjustTextareaHeight };
+};
+
+export const validateContent = (content) => {
+  const strippedContent = content.replace(/<[^>]+>/g, '');
+  const trimmedContent = strippedContent.trim();
+  const hasNonWhitespace = /[^\s|&nbsp;]/.test(strippedContent);
+  
+  if (!hasNonWhitespace) {
+    return {
+      valid: false,
+      error: 'Konten tidak boleh hanya berisi spasi',
+    };
+  }
+
+  return {
+    valid: true,
+    trimmedContent,
+  };
 };

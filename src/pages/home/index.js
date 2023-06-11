@@ -26,7 +26,7 @@ const HomePage = ({ data, totalPages }) => {
                 <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint necessitatibus molestias explicabo.</p>
               </div>
               <div className="grid gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-2 xl:grid-cols-2 xl:gap-16">
-                {data && data.length > 0 ? (
+                { data && data.length > 0 ? (
                   <>
                     {data.map((post) => (
                       <ArticleComp key={post.id} post={post} />

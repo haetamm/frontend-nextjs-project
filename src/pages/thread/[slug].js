@@ -81,10 +81,10 @@ const DetailPage = ({ data }) => {
                     <span className="text-md font-medium text-blue-600 uppercase">Web Programming</span>
                     
                     <div className="flex flex-row items-center">
-                      <div className="text-md font-medium text-gray-500 flex flex-row items-center mr-5 cursor-pointer">
+                      <a href='#comment' className="text-md font-medium text-gray-500 flex flex-row items-center mr-5 cursor-pointer">
                         <BsFillChatTextFill className='w-4 h-4 mr-1' />
                         <span>{data.comments.length}</span>
-                      </div>
+                      </a>
 
                       <div
                         onClick={loggedIn ? (event) => handleLikeThread(event, data.id) : undefined}
@@ -114,7 +114,9 @@ const DetailPage = ({ data }) => {
                   <div className="whitespace-pre-wrap break-words">
                     {ReactHtmlParser(data.body)}
                   </div>
-                  <FormCommentComp threadId={data.id} loggedIn={loggedIn}/>
+                  <div id='comment'>
+                    <FormCommentComp threadId={data.id} loggedIn={loggedIn}/>
+                  </div>
                 </article>
               </div>
             ) : (
