@@ -37,6 +37,8 @@ export const useForm = () => {
             newErrorMessages.title = error.msg;
         } else if (error.path === "body") {
             newErrorMessages.body = error.msg;
+        }else if (error.path === "comentar") {
+            newErrorMessages.comentar = error.msg;
         }
     });
   

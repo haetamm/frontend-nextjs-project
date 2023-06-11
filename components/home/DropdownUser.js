@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { useContext } from 'react';
+import { CgProfile } from 'react-icons/cg';
+import { AiOutlineLogout } from 'react-icons/ai';
 import AuthContext from '../../utils/AuthContext';
 
 const DropdownUser = ({ handleLogout }) => {
@@ -47,23 +49,13 @@ const DropdownUser = ({ handleLogout }) => {
                         <div className="dropdown-content men mb-2 shadow bg-base-100 rounded-md hidden xs:block w-[15rem]">
                             <div className="py-1 cursor-pointer hidden xs:block">
                                 <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
-                                </svg>
-                                <span className="ml-2">My Profile</span>
-                                </span>
-                            </div>
-                            <div className="py-1 cursor-pointer hidden xs:block md:hidden">
-                                <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
-                                    
-                                    <span className="ml-2">My Sastra</span>
+                                    <CgProfile className='h-5 w-5' />
+                                    <span className="ml-2">My Profile</span>
                                 </span>
                             </div>
                             <button onClick={handleLogout} className="py-1 cursor-pointer hidden xs:block w-full">
                                 <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                                    </svg>
+                                    <AiOutlineLogout className='h-5 w-5' />
                                     <span className="ml-2">Logout</span>
                                 </span>
                             </button>

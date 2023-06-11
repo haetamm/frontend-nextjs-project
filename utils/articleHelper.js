@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+
 export function formatDate(dateStr) {
     const date = new Date(dateStr);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -27,3 +29,29 @@ export function getOverview(body) {
         return body
     }
 }
+
+export const getInitialLikeColor = (data, loggedIn) => {
+  if (data && data.likes && data.likes.length > 0 && loggedIn && data.likes.find((like) => like.user.id === loggedIn.user?.id)) {
+    return 'text-red-500';
+  }
+  return 'text-gray-500';
+};
+
+export const useTextarea = () => {
+    const textareaRef = useRef(null);
+    const [textareaValue, setTextareaValue] = useState('');
+  
+    const handleTextareaChange = (event) => {
+      setTextareaValue(event.target.value);
+      adjustTextareaHeight();
+    };
+  
+    const adjustTextareaHeight = () => {
+      const textarea = textareaRef.current;
+      textarea.style.height = 'auto';
+      const updatedHeight = textarea.scrollHeight + 'px';
+      textarea.style.height = updatedHeight;
+    };
+  
+    return { textareaRef, textareaValue, setTextareaValue, handleTextareaChange, adjustTextareaHeight };
+};
