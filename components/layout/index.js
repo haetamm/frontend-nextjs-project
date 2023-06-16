@@ -13,12 +13,12 @@ const Index = ({ children, siteTitle, siteDescription, guest }) => {
   useEffect(() => {
     const notificationShown =
       notificationHelper(
-        `Selamat ${localStorage.getItem('registrationSuccess')}, Silakan login!.`,
+        `Selamat ${sessionStorage.getItem('registrationSuccess')}, Silakan login!.`,
         'registrationSuccess'
       );
   
     if (notificationShown) {
-      localStorage.removeItem('registrationSuccess') || localStorage.removeItem('addThreadSuccess');
+      sessionStorage.removeItem('registrationSuccess') || sessionStorage.removeItem('addThreadSuccess');
     }
   }, []);
 

@@ -32,7 +32,7 @@ const RegisterPage = () => {
                 const response = await endpoint.post('users', formData);
                 const client = response.data.addedUser.username
                 
-                localStorage.setItem('registrationSuccess', client);
+                sessionStorage.setItem('registrationSuccess', client);
                 router.push('/guest/login');        
                 setFormData({
                     username: '',
@@ -46,9 +46,9 @@ const RegisterPage = () => {
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.errors) {
                     handleErrorResponse(error.response.data);
-                  } else {
-                    console.error(error);
-                  }
+                } else {
+                console.error(error);
+                }
             }
         }
     };

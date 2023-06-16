@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
     const fetchData = async () => {
       try {
         const response = await endpoint.get('auth');
+        console.log(response.data);
 
         if (response.status === 200) {
           setLoggedIn(response.data);
@@ -24,8 +25,12 @@ export function AuthProvider({ children }) {
     fetchData();
   }, []);
 
+  const updateLoginStatus = (data) => {
+    setLoggedIn(data);
+  };
+
   return (
-    <AuthContext.Provider value={{ loggedIn }}>
+    <AuthContext.Provider value={{ loggedIn, updateLoginStatus }}>
       {children}
     </AuthContext.Provider>
   );

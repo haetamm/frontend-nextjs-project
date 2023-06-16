@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { AiFillSetting, AiFillLike } from 'react-icons/ai';
-import { BsFillChatTextFill } from 'react-icons/bs';
+import { BsFillChatTextFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import Layout from '../../../components/layout';
 import AuthContext from '../../../utils/AuthContext';
 import SideBarUser from '../../../components/home/SideBarUser';
@@ -11,6 +11,9 @@ import ReactHtmlParser from 'html-react-parser';
 import Image from 'next/image';
 import NotFoundComp from '../../../components/thread/NotFoundComp';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+
 
 const DetailPage = ({ data }) => {
   const siteTitle = data ? `${getOverview(data.title)} | The North` : 'not found';
@@ -18,6 +21,19 @@ const DetailPage = ({ data }) => {
   const { loggedIn } = useContext(AuthContext);
   const [likesCount, setLikesCount] = useState(data?.likes.length || 0);
   const [likeColor, setLikeColor] = useState('text-gray-500');
+  const router = useRouter();
+
+  const handleGoBack = () => {
+    if (window.location.hash) {
+      router.back(); 
+      setTimeout(() => {
+        router.back(); 
+      }, 0);
+    } else {
+      router.back(); 
+    }
+  };
+  
 
   useEffect(() => {
     if (loggedIn) {
@@ -37,8 +53,26 @@ const DetailPage = ({ data }) => {
     }
   };
 
+  const handleDelete = async (e, threadId) => {
+    try {
+      e.stopPropagation();
+      const response = await endpoint.delete(`threads/${threadId}`);
+      toast.info(response.data.message);
+      router.back();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const toggleLikeColor = () => {
     setLikeColor((prevColor) => (prevColor === 'text-red-500' ? 'text-gray-500' : 'text-red-500'));
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -49,10 +83,11 @@ const DetailPage = ({ data }) => {
         <div className="bg-slate-200 rounded-none xs:rounded-tl-[10rem] xs:rounded-tr-[10rem] hover-animation flex min-h-screen w-full max-w-full flex-col mx-auto border-x-0 border-light-border pb-[18rem] dark:border-dark-border xs:border-x">
           <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-slate-200">
             {data ? (
+              <>
               <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
                 <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                   <header className="mb-4 lg:mb-6 not-format">
-                    <address className="flex items-center mb-6 not-italic">
+                    <address className="flex items-center justify-between mb-6 not-italic">
                       <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                         <Image
                           priority
@@ -72,22 +107,22 @@ const DetailPage = ({ data }) => {
                           </p>
                         </div>
                       </div>
+                      <BsFillArrowLeftCircleFill onClick={handleGoBack} className='h-12 w-12 cursor-pointer'/>
                     </address>
                     <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{data.title}</h1>
                   </header>
 
                   <hr className="border-gray-300" />
-                  <div className="flex items-center justify-between px-4 py-6 overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-6">
                     <span className="text-md font-medium text-blue-600 uppercase">Web Programming</span>
                     
-                    <div className="flex flex-row items-center">
+                    <div className="flex items-center">
                       <a href='#comment' className="text-md font-medium text-gray-500 flex flex-row items-center mr-5 cursor-pointer">
                         <BsFillChatTextFill className='w-4 h-4 mr-1' />
                         <span>{data.comments.length}</span>
                       </a>
 
-                      <div
-                        onClick={loggedIn ? (event) => handleLikeThread(event, data.id) : undefined}
+                      <div onClick={loggedIn ? (event) => handleLikeThread(event, data.id) : undefined}
                         className={`text-md font-medium flex flex-row items-center cursor-pointer mr-5 ${likeColor}`}
                       >
                         <AiFillLike className='w-4 h-4 mr-1' />
@@ -98,15 +133,33 @@ const DetailPage = ({ data }) => {
                               className="text-md font-medium text-gray-500 flex flex-row items-center select-none">
                               <AiFillSetting className='h-5 w-5' />
                           </div>
-                          { loggedIn && data.user.id === loggedIn.user?.id &&
-                              <ul tabIndex={0} className="dropdown-content mr-2 menu p-1 shadow bg-base-100 rounded-md w-[7rem]">
-                                  <li><Link href={`/update/${data.slug}`}>Edit Thread</Link></li>
+                          { loggedIn && data.user.id === loggedIn.user?.id && 
+                            <>
+                              <ul tabIndex={0} className="dropdown-content mr-2 mt-0 menu p-1 shadow bg-base-100 rounded-md w-[7rem]">
+                                  <li><Link href={`/update/${data.slug}`}>Edit</Link></li>
+                                  <li><a onClick={()=>window.my_modal_1.showModal()}>Delete</a></li>
                               </ul>
+                              <dialog id="my_modal_1" className="modal p-2">
+                                <form method="dialog" className="w-full m-2 xs:w-[300px] rounded-lg px-8 py-3 bg-white">
+                                  <h3 className="font-bold text-lg">Peringatan!</h3>
+                                  <p className="py-4">Thread ini akan dihapus?</p>
+                                  <div className='flex justify-end'>
+                                    <div className="">
+                                      <button className="px-3 py-1 rounded hover:bg-yellow-600 bg-yellow-400">Cancel</button>
+                                    </div>
+                                    <div onClick={loggedIn ? (event) => handleDelete(event, data.id) : undefined} className=" ml-2">
+                                      <button className="px-3 py-1 rounded hover:bg-red-600 bg-red-400">Yes</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </dialog>
+                            </>
                           }
                       </div>
                     </div>
                   </div>
-                  <hr className="border-gray-300 mb-8" />
+                  
+                  <hr className="border-gray-300 mb-8 mt-0" />
 
                   <div className="flex justify-center mb-4">
                     <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="" />
@@ -119,6 +172,8 @@ const DetailPage = ({ data }) => {
                   </div>
                 </article>
               </div>
+              <button onClick={scrollToTop} className="hidden xs:block fixed z-90 bottom-8 right-8 border-0 w-10 h-10 rounded-full drop-shadow-md bg-black text-white text-3xl font-bold">&uarr;</button>
+              </>
             ) : (
                 <div className='font bold'>
                   <NotFoundComp />
@@ -126,7 +181,9 @@ const DetailPage = ({ data }) => {
               )
             }
           </main>
+         
         </div>
+        
       </div>
     </Layout>
   );

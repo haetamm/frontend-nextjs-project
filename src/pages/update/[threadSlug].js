@@ -10,7 +10,7 @@ import { validateContent } from '../../../utils/articleHelper';
 import FormEditorComp from '../../../components/thread/ThreadEditorComp';
 import FormInputTitleComp from '../../../components/thread/FormInputTitleComp';
 
-const CreateThreadPage = () => {
+const UpdateThreadPage = () => {
   const siteTitle = 'Update Thread | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
@@ -39,8 +39,8 @@ const CreateThreadPage = () => {
     };
 
     if (threadSlug) {
-      getThread();
-    }
+        getThread();
+      }
   }, [threadSlug]);
 
   const handleSubmit = async () => {
@@ -122,4 +122,4 @@ const CreateThreadPage = () => {
   );
 };
 
-export default CreateThreadPage;
+export default UpdateThreadPage;

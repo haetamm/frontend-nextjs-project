@@ -25,9 +25,9 @@ const ArticleComp = ({ post }) => {
           <Link href={`/thread/${post.slug}`} className="transition duration-100 hover:text-rose-500 active:text-rose-600">{getOverview(post.title)}</Link>
         </h2>
         <small className="select-none text-black custom-button main-tab dark-bg-tab group relative pointer hover:bg-light-primary/10 active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20">
-          by {post.user.username} | {new Date(post.updated_at).diffforHumans()}
+          by {post.user.username} | {new Date(post.created_at).diffforHumans()}
           <div className="invisible absolute left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-[#666666] px-1 py-0.5 text-xs text-white opacity-0 [transition:visibility_0ms_ease_200ms,opacity_200ms_ease] dark:bg-[#495A69] group-hover:visible group-hover:opacity-100 group-hover:delay-500 group-focus-visible:visible group-focus-visible:opacity-100 translate-y-3">
-            <div>{formatDate(post.updated_at)}, {isoToWIB(post.updated_at)}</div>
+            <div>{formatDate(post.created_at)}, {isoToWIB(post.created_at)}</div>
           </div>
         </small>
         

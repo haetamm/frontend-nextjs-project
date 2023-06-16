@@ -99,7 +99,7 @@ const SIdebarComp = ({ showSIdebar }) => {
                                 { loggedIn &&
                                     <div className="border-t border-gray-300">
                                         <div className="w-full flex items-center justify-between pt-1">
-                                            <div className="flex items-center">
+                                            <Link href={'/profile'} className="flex items-center">
                                                 <Image
                                                     priority
                                                     src="/image/noimage.png"
@@ -109,7 +109,7 @@ const SIdebarComp = ({ showSIdebar }) => {
                                                     alt="default"
                                                 />
                                                 <p tabIndex="0" className="focus:outline-none text-gray-800 text-base leading-4 ml-2">{loggedIn.user.username}</p>
-                                            </div>
+                                            </Link>
                                             <ul className="flex">
                                                 <li className="cursor-pointer text-gray-800 pt-5 pb-3">
                                                     <div tabIndex="0" className="focus:outline-none focus:text-indigo-600 font-bold w-6 h-6 md:w-8 md:h-8">

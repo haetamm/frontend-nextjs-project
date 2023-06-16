@@ -1,28 +1,31 @@
-// usePagination.js
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const usePagination = (totalPages) => {
+const usePagination = (totalPages, route) => {
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
+  const { page } = router.query;
 
   useEffect(() => {
     let currentPage;
+    const savedPageKey = route === '/home' ? 'currentPageHome' : 'currentPageUser';
+    const savedPage = sessionStorage.getItem(savedPageKey);
+    
     if (!router.query.page) {
-      const savedPage = localStorage.getItem('currentPage');
       currentPage = savedPage ? parseInt(savedPage) : 1;
       setCurrentPage(currentPage);
-      router.replace(`/home?page=${currentPage}`);
+      router.replace(`${route}?page=${currentPage}`);
     } else {
       currentPage = parseInt(router.query.page);
       setCurrentPage(currentPage);
     }
-  }, [router]);
+  }, [router, route]);
 
   const handlePageChange = (page) => {
     window.scrollTo(0, 0);
-    localStorage.setItem('currentPage', page);
-    router.push(`/home?page=${page}`);
+    const savedPageKey = route === '/home' ? 'currentPageHome' : 'currentPageUser';
+    sessionStorage.setItem(savedPageKey, page);
+    router.push(`${route}?page=${page}`);
   };
 
   const renderPagination = () => {
@@ -43,10 +46,10 @@ const usePagination = (totalPages) => {
 
     if (currentPage > 1) {
       pages.push(
-        <li key="previous" className="mx-1 p-1">
+        <li key="previous" className=" p-1">
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
-            className="py-2 ml-1 px-4 border-2 rounded-sm bg-blue-300"
+            className="py-1 px-2 border-2 rounded-sm bg-blue-300"
           >
             &lt;
           </button>
@@ -55,16 +58,18 @@ const usePagination = (totalPages) => {
     }
 
     for (let i = startPage; i <= endPage; i++) {
-      pages.push(
-        <li key={i} className={` p-1 ${currentPage === i ? 'font-bold text-black' : 'text-black'}`}>
-          <button
-            onClick={() => handlePageChange(i)}
-            className=" py-2 ml-1 px-4 border-2 rounded-sm bg-blue-300"
-          >
-            {i}
-          </button>
-        </li>
-      );
+      if (i > 0) { 
+        pages.push(
+          <li key={i} className={` p-1 m-1 ${currentPage === i ? 'font-bold text-black' : 'text-black'}`}>
+            <button
+              onClick={() => handlePageChange(i)}
+              className=" py-1 px-2 border-2 rounded-sm bg-blue-300"
+            >
+              {i}
+            </button>
+          </li>
+        );
+      }
     }
 
     if (currentPage < totalPages) {
@@ -72,7 +77,7 @@ const usePagination = (totalPages) => {
         <li key="next" className="mx-1 p-1">
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
-            className=" py-2 ml-1 px-4 border-2 rounded-sm bg-blue-300"
+            className=" py-1 px-2 border-2 rounded-sm bg-blue-300"
           >
             &#62;
           </button>
@@ -80,7 +85,16 @@ const usePagination = (totalPages) => {
       );
     }
 
-    return <ul className="grid grid-cols-5 xs:flex mt-8">{pages}</ul>;
+    return (
+      <>
+        <div className='justify-center flex mt-10'>
+          <div className='font-bold text-lg'>On page: {page}</div>
+        </div>
+        <div className='text-center mt-0 justify-center grid-cols-5 flex text-md mb-3 text-gray-800 text-lg'>
+          <ul className="flex mt-8">{pages}</ul>
+        </div>
+      </>
+    );
   };
 
   return {

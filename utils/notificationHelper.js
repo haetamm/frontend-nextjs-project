@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 export const notificationHelper = (message, storageKey) => {
-    const data = localStorage.getItem(storageKey);
+    const data = sessionStorage.getItem(storageKey);
   
     if (data) {
       const toastId = toast.info(message, {
@@ -17,7 +17,7 @@ export const notificationHelper = (message, storageKey) => {
   
       setTimeout(() => {
         toast.dismiss(toastId);
-        localStorage.removeItem(storageKey);
+        sessionStorage.removeItem(storageKey);
       }, 5000);
   
       return true; 

@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { AiOutlineLogout } from 'react-icons/ai';
 import AuthContext from '../../utils/AuthContext';
+import Link from 'next/link';
 
 const DropdownUser = ({ handleLogout }) => {
     const { loggedIn } = useContext(AuthContext);
@@ -47,12 +48,12 @@ const DropdownUser = ({ handleLogout }) => {
                             </div>
                         </button>
                         <div className="dropdown-content men mb-2 shadow bg-base-100 rounded-md hidden xs:block w-[15rem]">
-                            <div className="py-1 cursor-pointer hidden xs:block">
+                            <Link href={'/profile'} className="py-1 cursor-pointer hidden xs:block">
                                 <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
                                     <CgProfile className='h-5 w-5' />
                                     <span className="ml-2">My Profile</span>
                                 </span>
-                            </div>
+                            </Link>
                             <button onClick={handleLogout} className="py-1 cursor-pointer hidden xs:block w-full">
                                 <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
                                     <AiOutlineLogout className='h-5 w-5' />

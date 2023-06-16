@@ -7,13 +7,18 @@ import { useRouter } from 'next/router';
 import handleLogout from '../../utils/handleLogout';
 import DropdownUser from './DropdownUser';
 import {IoMdNotifications} from 'react-icons/io';
+import { useContext } from 'react';
+import AuthContext from '../../utils/AuthContext';
+
 
 
 const SideBarUser = () => {
     const router = useRouter();
+    const { loggedIn } = useContext(AuthContext);
+    const threadClassName = router.pathname === '/[username]' ? "text-indigo-700" : "text-white"  ;
 
     const resetPage = () => {
-        localStorage.setItem('currentPage', 1);
+        router.pathname === '/home' ? sessionStorage.setItem('currentPageHome', 1) : sessionStorage.setItem('currentPageUser', 1);
     }
     
     const handleLogoutClick = async () => {
@@ -31,7 +36,7 @@ const SideBarUser = () => {
                     </h1>
 
                     <div className="flex items-center justify-around xs:flex-col xs:justify-center xl:block">
-                        <Link href={'/home?page=1'} onClick={resetPage} className="group py-1 outline-none flex">
+                        <Link href={'/home'} onClick={router.pathname == '/home' ? resetPage : undefined} className="group py-1 outline-none flex">
                             <div className={`${router.pathname == "/home" ? "text-indigo-700" : "text-white"} custom-button flex items-center justify-center gap-4 self-start p-2 text-xl xs:p-3 xl:pr-5`}>
                                 <FaHome className='h-7 w-7'/>
                                 <p className='hidden xl:block'>Home</p>
@@ -49,12 +54,12 @@ const SideBarUser = () => {
                                 <p className="hidden xl:block">Notifications</p>
                             </div>
                         </a>
-                        <a href='#' className="group py-1 outline-none flex cursor-not-allowed group">
-                            <div className="custom-button flex items-center justify-center gap-4 self-start p-2 text-xl text-white xs:p-3 xl:pr-5">
+                        <Link href={{ pathname: `/${loggedIn.user?.username}` }} onClick={router.pathname == '/[username]' ? resetPage : undefined} className="group py-1 outline-none flex cursor-pointer group">
+                            <div className={`${threadClassName} custom-button flex items-center justify-center gap-4 self-start p-2 text-xl xs:p-3 xl:pr-5`}>
                                 <RiBook2Fill className='h-7 w-7' />
                                 <p className="hidden xl:block">Threads</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                     <Link href={'/create'} className="cursor-pointer custom-button main-tab accent-tab absolute right-4 -translate-y-[72px] bg-main-accent text-lg font-bold text-white outline-none transition hover:brightness-90 active:brightness-75 xs:static xs:translate-y-0 bg-blue-700 hover:text-red-700 rounded-full p-2 xl:w-11/12" type="button">

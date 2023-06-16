@@ -10,12 +10,12 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     const notificationShown =
       notificationHelper(
-        `Selamat datang ${localStorage.getItem('loginSuccess')}!`,
+        `Selamat datang ${sessionStorage.getItem('loginSuccess')}!`,
         'loginSuccess'
       );
   
     if (notificationShown) {
-      localStorage.removeItem('loginSuccess');
+      sessionStorage.removeItem('loginSuccess');
     }
   }, []);
 

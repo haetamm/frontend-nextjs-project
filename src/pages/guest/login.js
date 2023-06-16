@@ -38,7 +38,7 @@ const LoginPage = () => {
                     withCredentials: true, 
                 });                
                 
-                localStorage.setItem('loginSuccess', formData.username);
+                sessionStorage.setItem('loginSuccess', formData.username);
                 router.reload();
                 router.push('/home?page=1');        
                 setFormData({
