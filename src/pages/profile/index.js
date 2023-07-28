@@ -203,7 +203,7 @@ const ProfilePage = () => {
                                                 <hr className="mt-4" />
                                                 <div className="flex flex-row-reverse p-3">
                                                     <div className="flex-initial pl-3">
-                                                        <button onClick={()=>window.my_modal_1.showModal()} type="button" className="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
+                                                        <button onClick={()=>window.my_modal_5.showModal()} type="button" className="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
                                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
                                                                 <path d="M0 0h24v24H0V0z" fill="none"></path>
                                                                 <path d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z" opacity=".3"></path>
@@ -231,7 +231,7 @@ const ProfilePage = () => {
                         </div>
                     </section>
                 </div>
-                <dialog id="my_modal_1" className="modal p-2">
+                <dialog id="my_modal_5" className="modal p-2">
                     <form method="dialog" className="w-full m-2 xs:w-[300px] rounded-lg px-2 py-2 bg-white">
                         <h3 className="font-bold text-lg">Masukan password!</h3>
                         <div className="md:col-span-5">

@@ -22,7 +22,68 @@
   top: -60px;
 }
 
+.table {
+	border-spacing: 0 15px;
+}
+
+i {
+	font-size: 1rem !important;
+}
+
+.table tr {
+	border-radius: 20px;
+}
+
+tr td:nth-child(n+5),
+tr th:nth-child(n+5) {
+	border-radius: 0 .625rem .625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+	border-radius: .625rem 0 0 .625rem;
+}
+
+.blur-text {
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
 /* Tambahkan gaya lain yang Anda inginkan untuk navbar */
 
+
+
+
+* {
+   font-family: 'Press Start 2P', cursive;
+   box-sizing: border-box;
+}
+
+#app {
+   padding: 1rem;
+   display: flex;
+   height: 100%;
+   justify-content: center; 
+   align-items: center;
+   color: var(--color);
+   text-shadow: 0px 0px var(--glowSize);
+   font-size: 6rem;
+   flex-direction: column;
+}
+
+#app .txt {
+   font-size: 1.8rem;
+}
+
+@keyframes blink {
+   0%   { opacity: 0; }
+   49%  { opacity: 0; }
+   50%  { opacity: 1; }
+   100% { opacity: 1; }
+}
+
+.blink {
+   animation-name: blink;
+   animation-duration: 1s;
+   animation-iteration-count: infinite;
+}
 
 

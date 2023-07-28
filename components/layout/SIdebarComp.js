@@ -7,6 +7,7 @@ import { BsCodeSlash } from 'react-icons/bs';
 import { AiOutlineCompass, AiOutlineClose } from 'react-icons/ai';
 import { TiMessages } from 'react-icons/ti';
 import { IoIosNotificationsOutline } from 'react-icons/io';
+import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AuthContext from '../../utils/AuthContext';
@@ -49,6 +50,23 @@ const SIdebarComp = ({ showSIdebar }) => {
                                             </div>
                                         </Link>
                                     </li>
+                                    { loggedIn !== null && loggedIn.is_admin == true &&  
+                                        <li>
+                                            <Link href={'/admin'} className="cursor-pointer">
+                                                <div className="text-gray-800 py-4">
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="flex items-center">
+                                                            <div className="w-6 h-6 md:w-8 md:h-8 text-gray-800">
+                                                            <MdOutlineAdminPanelSettings size={24}/>
+                                                            </div>
+                                                            <p tabIndex="0" className={`${router.pathname == "/admin" ? "text-indigo-700 border-b-2 border-indigo-700" : "text-gray-800"} font-bold xl:text-base md:text-xl text-base ml-3`}>Administrator</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Link>
+
+                                        </li>
+                                    }
                                     <li>
                                         <a className="cursor-pointer hover:bg-blue-300">
                                             <div className="text-gray-800 py-4">

@@ -2,9 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import { useContext } from 'react';
 import { CgProfile } from 'react-icons/cg';
+import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { AiOutlineLogout } from 'react-icons/ai';
 import AuthContext from '../../utils/AuthContext';
 import Link from 'next/link';
+import ModalComp from '../utils/ModalComp';
 
 const DropdownUser = ({ handleLogout }) => {
     const { loggedIn } = useContext(AuthContext);
@@ -48,18 +50,28 @@ const DropdownUser = ({ handleLogout }) => {
                             </div>
                         </button>
                         <div className="dropdown-content men mb-2 shadow bg-base-100 rounded-md hidden xs:block w-[15rem]">
+                            { loggedIn.is_admin == true && 
+                                <Link href={'/admin'} className="py-1 cursor-pointer hidden xs:block">
+                                    <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
+                                        <MdOutlineAdminPanelSettings className='h-6 w-6' />
+                                        <span className="ml-2">Administrator</span>
+                                    </span>
+                                </Link>
+                            }
                             <Link href={'/profile'} className="py-1 cursor-pointer hidden xs:block">
                                 <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
                                     <CgProfile className='h-5 w-5' />
                                     <span className="ml-2">My Profile</span>
                                 </span>
                             </Link>
-                            <button onClick={handleLogout} className="py-1 cursor-pointer hidden xs:block w-full">
+                            <button onClick={()=>window.my_modal_1.showModal()} className="py-1 cursor-pointer hidden xs:block w-full">
                                 <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
                                     <AiOutlineLogout className='h-5 w-5' />
                                     <span className="ml-2">Logout</span>
                                 </span>
                             </button>
+                            <ModalComp id='my_modal_1' title='Logout?' body='You can always log back in at any time.' handle={handleLogout}/>
+                        
                         </div>
                     </div>
                 </div>

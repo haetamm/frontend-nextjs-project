@@ -9,6 +9,7 @@ import AuthContext from '../../utils/AuthContext';
 import { useContext } from 'react';
 import handleLogout from '../../utils/handleLogout';
 import useScroll from '../../utils/useScrollHandler';
+import ModalComp from '../utils/ModalComp';
 
 
 const NavComp = ({ children, guest }) => {
@@ -57,9 +58,15 @@ const NavComp = ({ children, guest }) => {
                             </Link> 
                         </>
                         ) : (
-                            <span className="relative mr-6">
-                                <button onClick={handleLogoutClick} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 text-md py-1`}>Logout</button>
-                            </span>
+                            <>
+                                <span className="relative mr-6">
+                                    <button onClick={()=>window.my_modal_3.showModal()} className={` bg-red-300 text-black focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded px-5 text-md py-1`}>Logout</button>
+                                </span>
+                                
+                                <ModalComp id='my_modal_3' title='Logout?' body='You can always log back in at any time.' handle={handleLogoutClick}/>
+                            
+                            </>
+
                         )
                     }
                     
