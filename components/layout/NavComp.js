@@ -29,7 +29,7 @@ const NavComp = ({ children, guest }) => {
     };
 
     const handleLogoutClick = async () => {
-        await handleLogout(router);
+        await handleLogout(router, loggedIn?.user?.id);
     };
 
     return (

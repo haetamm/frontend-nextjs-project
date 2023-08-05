@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { formatDate } from "../../utils/articleHelper";
+import { formatDate, isoToWIB } from "../../utils/articleHelper";
 import ModalCustom from "../utils/ModalCustom";
 import { useState } from "react";
 import { useRouter } from 'next/router';
@@ -16,28 +16,39 @@ const TableUserComp = ({ users, totalCount, currentPage, handleNextPage, handleP
     const router = useRouter();
     const { page } = router.query;
 
-    const handleModalOpen = (status, username, id) => {
-        setModalVisible(true);
-        setTitle(`${status} !!`);
-        setBody(`User '${username}' akan di ${status} ?`);
-        setUsername(username);
-        setId(id);
+    const handleModalOpen = (status, username, id, expries) => {
+        if (new Date() < new Date(expries)) {
+            setModalVisible(true);
+            setTitle('Peringatan !!!');
+            setBody(`User '${username}' sedang online..`);
+        } else {
+            setModalVisible(true);
+            setTitle(`${status} !!`);
+            setBody(`User '${username}' akan di ${status} ?`);
+            setUsername(username);
+            setId(id);
+        }
     };
 
     const handleDeactive = async (e) => {
         try {
-            const response = await endpoint.delete(`users/${id}`);
+            await endpoint.delete(`users/${id}`);
             handleModalClose()
             toast.info(`user ${username} berhasil di nonaktifkan`);
             getUsers(page)
         } catch (error) {
-              console.error(error);
+            if (error.response.status === 403) {
+                setModalVisible(false);
+                setModalVisible(true);
+                setTitle('Peringatan !!!');
+                setBody(`User '${username}' sedang online..`);
+            }
         }
     }
 
     const handleActive = async (e) => {
         try {
-            const response = await endpoint.post(`users/${username}/active`);
+            await endpoint.post(`users/${username}/active`);
             handleModalClose()
             toast.info(`user ${username} berhasil di aktifkan`);
             getUsers(page)
@@ -121,7 +132,11 @@ const TableUserComp = ({ users, totalCount, currentPage, handleNextPage, handleP
                                                             />
                                                             <div className="ml-4">
                                                                 <p className="mb-0.5 font-medium">{user.username}</p>
-                                                                <p className="mb-0.5 text-gray-500">x@example.com</p>
+                                                                {new Date() < new Date(user.expried_token) ? (
+                                                                    <span className="bg-green-200 py-0 px-2 rounded-full">online</span>
+                                                                ) : (
+                                                                    <span className="bg-red-200 py-0 px-2 rounded-full">offline</span>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </th>
@@ -134,7 +149,7 @@ const TableUserComp = ({ users, totalCount, currentPage, handleNextPage, handleP
                                                         <span className={`text-xs py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-medium ${user.deleted_at === null ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}  rounded-full`}>{ user.deleted_at === null ? 'Active' : 'Inactive'}</span>
                                                     </td>
                                                     <td  className="align-middle text-sm font-normal px-6 py-4 whitespace-nowrap text-left">
-                                                        <span onClick={() => handleModalOpen(user.deleted_at === null ? 'Deactivated' : 'Activated', user.username, user.id)} className={`${user.deleted_at !== null ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}  py-1 px-2.5 cursor-pointer font-medium text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 transition duration-300 ease-in-out rounded-full`}>{user.deleted_at === null ? 'Deactivated' : 'Activated'}</span>
+                                                        <span onClick={() => handleModalOpen(user.deleted_at === null ? 'Deactivated' : 'Activated', user.username, user.id, user.expried_token)} className={`${user.deleted_at !== null ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}  py-1 px-2.5 cursor-pointer font-medium text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 transition duration-300 ease-in-out rounded-full`}>{user.deleted_at === null ? 'Deactivated' : 'Activated'}</span>
                                                     </td>
                                                 </tr>
                                             ))}

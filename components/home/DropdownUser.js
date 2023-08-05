@@ -13,6 +13,10 @@ const DropdownUser = ({ handleLogout }) => {
     if (!loggedIn || !loggedIn.user) {
         return null;
     }
+
+    const resetPage = () => {
+        sessionStorage.setItem('savePageAdmin', 1);
+    }
     return (
         <>
             { loggedIn !== null && (
@@ -53,7 +57,7 @@ const DropdownUser = ({ handleLogout }) => {
                             { loggedIn.is_admin == true && 
                                 <Link href={'/admin'} className="py-1 cursor-pointer hidden xs:block">
                                     <span className="py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white flex">
-                                        <MdOutlineAdminPanelSettings className='h-6 w-6' />
+                                        <MdOutlineAdminPanelSettings className='h-5 w-5' />
                                         <span className="ml-2">Administrator</span>
                                     </span>
                                 </Link>

@@ -45,20 +45,18 @@ const Admin = () => {
     };
 
     useEffect(() => {
-        const { page } = router.query;
-
+        let currentPage;
         const savedPage = sessionStorage.getItem('savePageAdmin');
-        let currentPage = 1; 
-
-        if (page && !isNaN(Number(page))) {
-            currentPage = parseInt(page);
-            router.replace(`/admin?page=${currentPage}`);
-        } else if (savedPage && !isNaN(Number(savedPage))) {
-            currentPage = parseInt(savedPage);
-            router.replace(`/admin?page=${currentPage}`);
+        
+        if (!router.query.page) {
+            currentPage = savedPage ? parseInt(savedPage) : 1;
+            setCurrentPage(currentPage);
+            router.replace(`admin?page=${currentPage}`);
+        } else {
+            currentPage = parseInt(router.query.page);
+            setCurrentPage(currentPage);
         }
 
-        setCurrentPage(currentPage);
 
         getUsers(currentPage);
     }, [router.query.page]);

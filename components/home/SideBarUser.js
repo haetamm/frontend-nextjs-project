@@ -22,7 +22,7 @@ const SideBarUser = () => {
     }
     
     const handleLogoutClick = async () => {
-        await handleLogout(router);
+        await handleLogout(router, loggedIn.user.id);
     };
 
     return (
