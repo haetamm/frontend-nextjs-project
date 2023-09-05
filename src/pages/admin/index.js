@@ -36,7 +36,6 @@ const Admin = () => {
         try {
             const response = await endpoint.get(`users?page=${currentPage}`);
             setUsers(response.data.users.users);
-            console.log(response.data.users)
             setTotalPages(response.data.users.totalPages);
             setTotalCount(response.data.users.totalCount);
         } catch (error) {
@@ -59,7 +58,7 @@ const Admin = () => {
 
 
         getUsers(currentPage);
-    }, [router.query.page]);
+    }, [router, router.query.page]);
 
     const handlePrevPage = () => {
         if (currentPage > 1) {
