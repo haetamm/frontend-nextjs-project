@@ -12,6 +12,7 @@ const HomePage = ({ data, totalPages }) => {
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
   const { loggedIn } = useContext(AuthContext);
   const route = '/home';
+  console.log(data)
   const { renderPagination } = usePagination(totalPages, route);
 
   return (
