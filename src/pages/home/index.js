@@ -54,6 +54,7 @@ export const getServerSideProps = async ({ query }) => {
     const page = query.page || 1;
     const response = await endpoint.get(`threads?page=${page}`);
     const data = response.data.threads.threads;
+    console.log(data)
     const totalPages = response.data.threads.totalPages;
 
     return {
