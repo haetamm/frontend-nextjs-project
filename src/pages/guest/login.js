@@ -39,14 +39,10 @@ const LoginPage = () => {
                     withCredentials: true, 
                 });
 
-                // Set cookie di sisi klien (frontend)
-                // cookiesFromResponse.forEach(cookie => {
-                //     Cookies.set('token', cookie, { path: '/' });
-                // });
                 
                 sessionStorage.setItem('loginSuccess', formData.username);
-                // router.reload();
-                // router.push('/home?page=1');        
+                router.reload();
+                router.push('/home?page=1');        
                 setFormData({
                     username: '',
                     password: ''
