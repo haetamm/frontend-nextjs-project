@@ -3,7 +3,8 @@ import endpoint from '../utils/api-endpoint';
 const handleLogout = async (router, id) => {
     try {
       const response = await endpoint.delete(`auth/${id}`);
-      router.reload();
+      console.log(response)
+      // router.reload();
     } catch (error) {
       console.log(error);
     }
