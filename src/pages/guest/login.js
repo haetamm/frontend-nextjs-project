@@ -8,6 +8,7 @@ import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
 import { useContext, useEffect } from 'react';
 import AuthContext from '../../../utils/AuthContext';
+// import Cookies from 'js-cookie';
 
 
 
@@ -37,7 +38,11 @@ const LoginPage = () => {
                 const response = await endpoint.post('auth', formData, {
                     withCredentials: true, 
                 });
-                console.log(response)                
+
+                // Set cookie di sisi klien (frontend)
+                // cookiesFromResponse.forEach(cookie => {
+                //     Cookies.set('token', cookie, { path: '/' });
+                // });
                 
                 sessionStorage.setItem('loginSuccess', formData.username);
                 // router.reload();
