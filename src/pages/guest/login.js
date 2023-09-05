@@ -36,11 +36,12 @@ const LoginPage = () => {
             try {
                 const response = await endpoint.post('auth', formData, {
                     withCredentials: true, 
-                });                
+                });
+                console.log(response)                
                 
                 sessionStorage.setItem('loginSuccess', formData.username);
-                router.reload();
-                router.push('/home?page=1');        
+                // router.reload();
+                // router.push('/home?page=1');        
                 setFormData({
                     username: '',
                     password: ''
