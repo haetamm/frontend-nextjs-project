@@ -55,21 +55,14 @@ export const getServerSideProps = async ({ query }) => {
     const page = query.page || 1;
     const response = await endpoint.get(`threads?page=${page}`);
     const data = response.data.threads.threads;
-    console.log(data);
+    console.log(data)
     const totalPages = response.data.threads.totalPages;
-
-    // Menambahkan header Cache-Control untuk mengontrol caching di sisi klien
-    const headers = {
-      'Cache-Control': 's-maxage=10, stale-while-revalidate', // Contoh: cache selama 10 detik dan perbaharui secara otomatis
-    };
 
     return {
       props: {
         data,
         totalPages,
       },
-      // Mengatur header respons
-      headers,
     };
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -82,6 +75,5 @@ export const getServerSideProps = async ({ query }) => {
     };
   }
 };
-
 
 export default HomePage;
