@@ -8,7 +8,7 @@ const handleLogout = async (router, id) => {
 
       // console.log(response)
       console.log(document.cookie);
-      // router.reload();
+      router.reload();
     } catch (error) {
       console.log(error);
     }
