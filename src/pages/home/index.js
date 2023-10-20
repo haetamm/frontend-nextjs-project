@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import Layout from '../../../components/layout';
 import endpoint from '../../../utils/api-endpoint';
 import AuthContext from '../../../utils/AuthContext';
@@ -6,34 +6,13 @@ import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
 
-const HomePage = () => {
+const HomePage = ({ data, totalPages }) => {
   const siteTitle = 'Home | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
   const { loggedIn } = useContext(AuthContext);
   const route = '/home';
-  const [data, setData] = useState([]);
-   const [totalPages, setTotalPages] = useState(1);
-  // console.log(data)
-  // const { renderPagination } = usePagination(totalPages, route);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://the-north.netlify.app/api/home");
-        const { data, totalPages } = await response.json();
-        setData(data);
-        setTotalPages(totalPages);
-          // const { renderPagination } = usePagination(totalPages, route);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setData([]);
-        setTotalPages(1);
-      }
-    };
-    fetchData();
-  }, []);
-
+  console.log(data)
   const { renderPagination } = usePagination(totalPages, route);
 
   return (
@@ -96,5 +75,32 @@ const HomePage = () => {
 //     };
 //   }
 // };
+export const getServerSideProps = async ({ query }) => {
+  try {
+    const page = query.page || 1;
+    const apiUrl = `http://localhost:8000/api/v1/threads?page=${page}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log(data);
+    const totalPages = data.threads.totalPages;
+
+    return {
+      props: {
+        data: data.threads.threads,
+        totalPages,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+
+    return {
+      props: {
+        data: [],
+        totalPages: 1,
+      },
+    };
+  }
+};
+
 
 export default HomePage;
