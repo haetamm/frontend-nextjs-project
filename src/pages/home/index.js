@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Layout from '../../../components/layout';
 import endpoint from '../../../utils/api-endpoint';
 import AuthContext from '../../../utils/AuthContext';
@@ -6,13 +6,34 @@ import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
 
-const HomePage = ({ data, totalPages }) => {
+const HomePage = () => {
   const siteTitle = 'Home | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
   const { loggedIn } = useContext(AuthContext);
   const route = '/home';
-  console.log(data)
+  const [data, setData] = useState([]);
+   const [totalPages, setTotalPages] = useState(1);
+  // console.log(data)
+  // const { renderPagination } = usePagination(totalPages, route);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://the-north.netlify.app/api/home");
+        const { data, totalPages } = await response.json();
+        setData(data);
+        setTotalPages(totalPages);
+          // const { renderPagination } = usePagination(totalPages, route);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setData([]);
+        setTotalPages(1);
+      }
+    };
+    fetchData();
+  }, []);
+
   const { renderPagination } = usePagination(totalPages, route);
 
   return (
@@ -50,30 +71,30 @@ const HomePage = ({ data, totalPages }) => {
   );
 };
 
-export const getServerSideProps = async ({ query }) => {
-  try {
-    const page = query.page || 1;
-    const response = await endpoint.get(`threads?page=${page}`);
-    const data = response.data.threads.threads;
-    console.log(data)
-    const totalPages = response.data.threads.totalPages;
+// export const getServerSideProps = async ({ query }) => {
+//   try {
+//     const page = query.page || 1;
+//     const response = await endpoint.get(`threads?page=${page}`);
+//     const data = response.data.threads.threads;
+//     console.log(data)
+//     const totalPages = response.data.threads.totalPages;
 
-    return {
-      props: {
-        data,
-        totalPages,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data:', error);
+//     return {
+//       props: {
+//         data,
+//         totalPages,
+//       },
+//     };
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
 
-    return {
-      props: {
-        data: [],
-        totalPages: 1,
-      },
-    };
-  }
-};
+//     return {
+//       props: {
+//         data: [],
+//         totalPages: 1,
+//       },
+//     };
+//   }
+// };
 
 export default HomePage;
