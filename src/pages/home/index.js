@@ -54,17 +54,43 @@ const HomePage = ({ data, totalPages }) => {
   );
 };
 
+// export const getServerSideProps = async ({ query }) => {
+//   try {
+//     const page = query.page || 1;
+//     const response = await endpoint.get(`threads?page=${page}`);
+//     const data = response.data.threads.threads;
+//     console.log(data)
+//     const totalPages = response.data.threads.totalPages;
+
+//     return {
+//       props: {
+//         data,
+//         totalPages,
+//       },
+//     };
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+
+//     return {
+//       props: {
+//         data: [],
+//         totalPages: 1,
+//       },
+//     };
+//   }
+// };
 export const getServerSideProps = async ({ query }) => {
   try {
     const page = query.page || 1;
-    const response = await endpoint.get(`threads?page=${page}`);
-    const data = response.data.threads.threads;
+    const apiUrl = `http://localhost:8000/api/v1/threads?page=${page}`; 
+    const response = await fetch(apiUrl);
+    const data = await response.json();
     console.log(data)
-    const totalPages = response.data.threads.totalPages;
+    const totalPages = data.threads.totalPages;
 
     return {
       props: {
-        data,
+        data: data.threads.threads, // 
         totalPages,
       },
     };
@@ -79,6 +105,7 @@ export const getServerSideProps = async ({ query }) => {
     };
   }
 };
+
 
 
 export default HomePage;
