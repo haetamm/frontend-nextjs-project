@@ -159,6 +159,9 @@ const DetailPage = ({ data }) => {
                       <Image
                         src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png"
                         alt="post-image"
+                        width={640}
+                        height={360}
+                        priority
                       />
                     </div>
                     <div className="whitespace-pre-wrap break-words">
