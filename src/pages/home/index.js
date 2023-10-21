@@ -6,6 +6,9 @@ import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
 
+export const config = {
+  runtime: 'nodejs', // or "edge"
+}
 
 
 const HomePage = ({ data, totalPages }) => {
