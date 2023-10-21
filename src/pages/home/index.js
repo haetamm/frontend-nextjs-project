@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext  } from 'react';
 import Layout from '../../../components/layout';
 import endpoint from '../../../utils/api-endpoint';
 import AuthContext from '../../../utils/AuthContext';
@@ -6,14 +6,15 @@ import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
 
+
+
 const HomePage = ({ data, totalPages }) => {
   const siteTitle = 'Home | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
   const { loggedIn } = useContext(AuthContext);
-  const route = '/home';
-  console.log(data)
-  const { renderPagination } = usePagination(totalPages, route);
+
+  const { renderPagination } = usePagination(totalPages, '/home');
 
   return (
     <Layout guest={!loggedIn} siteTitle={siteTitle} siteDescription={siteDescription}>
@@ -50,43 +51,17 @@ const HomePage = ({ data, totalPages }) => {
   );
 };
 
-// export const getServerSideProps = async ({ query }) => {
-//   try {
-//     const page = query.page || 1;
-//     const response = await endpoint.get(`threads?page=${page}`);
-//     const data = response.data.threads.threads;
-//     console.log(data)
-//     const totalPages = response.data.threads.totalPages;
-
-//     return {
-//       props: {
-//         data,
-//         totalPages,
-//       },
-//     };
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-
-//     return {
-//       props: {
-//         data: [],
-//         totalPages: 1,
-//       },
-//     };
-//   }
-// };
 export const getServerSideProps = async ({ query }) => {
   try {
     const page = query.page || 1;
-    const apiUrl = `http://localhost:8000/api/v1/threads?page=${page}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    console.log(data);
-    const totalPages = data.threads.totalPages;
+    const response = await endpoint.get(`threads?page=${page}`);
+    const data = response.data.threads.threads;
+    console.log(data)
+    const totalPages = response.data.threads.totalPages;
 
     return {
       props: {
-        data: data.threads.threads,
+        data,
         totalPages,
       },
     };

@@ -156,7 +156,10 @@ const DetailPage = ({ data }) => {
                     <hr className="border-gray-300 mb-8 mt-0" />
 
                     <div className="flex justify-center mb-4">
-                      <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="" />
+                      <Image
+                        src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png"
+                        alt="post-image"
+                      />
                     </div>
                     <div className="whitespace-pre-wrap break-words">
                       {ReactHtmlParser(data.body)}

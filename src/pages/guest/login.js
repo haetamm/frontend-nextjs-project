@@ -8,9 +8,6 @@ import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
 import { useContext, useEffect } from 'react';
 import AuthContext from '../../../utils/AuthContext';
-// import Cookies from 'js-cookie';
-
-
 
 
 const LoginPage = () => {
