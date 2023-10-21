@@ -82,7 +82,7 @@ const HomePage = ({ data, totalPages }) => {
 export const getServerSideProps = async ({ query }) => {
   try {
     const page = query.page || 1;
-    const apiUrl = `http://localhost:8000/api/v1/threads?page=${page}`; 
+    const apiUrl = `http://127.0.0.1:8000/api/v1/threads?page=${page}`; 
     const response = await fetch(apiUrl);
     const data = await response.json();
     console.log(data)
