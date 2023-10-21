@@ -21,7 +21,7 @@ const FormCommentComp = ({ loggedIn, threadId }) => {
             }
         }
         getComments();
-    },[]);
+    },[threadId]);
 
     useEffect(() => {
         adjustTextareaHeight();
