@@ -16,25 +16,33 @@ import { toast } from 'react-toastify';
 import ModalComp from '../../../components/utils/ModalComp';
 
 
-const DetailPage = ({ data }) => {
-  const siteTitle = data ? `${getOverview(data.title)} | The North` : 'not found';
-  const siteDescription = data ? ReactHtmlParser(getOverview(data.body)) : 'not found';
+const DetailPage = () => {
   const { loggedIn } = useContext(AuthContext);
-  const [likesCount, setLikesCount] = useState(data?.likes.length || 0);
+  const [data, setData] = useState()
   const [likeColor, setLikeColor] = useState('text-gray-500');
   const router = useRouter();
+  const { slug } = router.query;
+  const [likesCount, setLikesCount] = useState(0);
 
-  const handleGoBack = () => {
-    if (window.location.hash) {
-      router.back(); 
-      setTimeout(() => {
-        router.back(); 
-      }, 0);
-    } else {
-      router.back(); 
-    }
-  };
-  
+
+  useEffect(() => {
+      const getThreadBySlug = async () => {
+        try {
+          const response = await endpoint.get(`threads/detail/${slug}`);
+          if (response) {
+            setData(response.data.thread);
+            if(response.data.thread && response.data.thread.likes){
+              setLikesCount(response.data.thread.likes.length);
+            }
+          } else {
+            setData(null);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    getThreadBySlug()
+  }, [slug]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -76,6 +84,19 @@ const DetailPage = ({ data }) => {
     });
   };
 
+  const handleGoBack = () => {
+    if (window.location.hash) {
+      router.back(); 
+      setTimeout(() => {
+        router.back(); 
+      }, 0);
+    } else {
+      router.back(); 
+    }
+  };
+
+  const siteTitle = data ? `${getOverview(data?.title)} | The North` : 'not found';
+  const siteDescription = data ? ReactHtmlParser(getOverview(data?.body)) : 'not found';
   return (
     <Layout guest={!loggedIn} siteTitle={siteTitle} siteDescription={siteDescription}>
       <div className="flex w-full justify-center gap-0">
@@ -100,7 +121,7 @@ const DetailPage = ({ data }) => {
                           />
                           <div>
                             <a href="#" rel="author" className="text-xl font-bold text-gray-900 dark:text-white">
-                              {data.user.username}
+                              {data.user?.username}
                             </a>
                             <p className="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO Flowbite</p>
                             <p className="text-base font-light text-gray-500 dark:text-gray-400">
@@ -120,7 +141,7 @@ const DetailPage = ({ data }) => {
                       <div className="flex items-center">
                         <a href='#comment' className="text-md font-medium text-gray-500 flex flex-row items-center mr-5 cursor-pointer">
                           <BsFillChatTextFill className='w-4 h-4 mr-1' />
-                          <span>{data.comments.length}</span>
+                          <span>{data.comments?.length}</span>
                         </a>
 
                         <div onClick={loggedIn ? (event) => handleLikeThread(event, data.id) : undefined}
@@ -134,7 +155,7 @@ const DetailPage = ({ data }) => {
                                 className="text-md font-medium text-gray-500 flex flex-row items-center select-none">
                                 <AiFillSetting className='h-5 w-5' />
                             </div>
-                            { loggedIn && data.user.id === loggedIn.user?.id && 
+                            { loggedIn && data.user?.id === loggedIn.user?.id && 
                               <>
                                 <ul tabIndex={0} className="dropdown-content mr-2 mt-0 menu p-1 shadow bg-base-100 rounded-md w-[7rem]">
                                     <li><Link href={`/update/${data.slug}`}>Edit</Link></li>
@@ -166,6 +187,7 @@ const DetailPage = ({ data }) => {
                     </div>
                     <div className="whitespace-pre-wrap break-words">
                       {ReactHtmlParser(data.body)}
+                      {/* {data.body} */}
                     </div>
                     <div id='comment'>
                       <FormCommentComp threadId={data.id} loggedIn={loggedIn}/>
@@ -188,27 +210,27 @@ const DetailPage = ({ data }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
-  try {
-    const slug = params.slug;
-    const response = await endpoint.get(`threads/detail/${slug}`);
-    const data = response.data.thread;
+// export const getServerSideProps = async ({ params }) => {
+//   try {
+//     const slug = params.slug;
+//     const response = await endpoint.get(`threads/detail/${slug}`);
+//     const data = response.data.thread;
 
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data:', error);
+//     return {
+//       props: {
+//         data,
+//       },
+//     };
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
 
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
-};
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   }
+// };
 
 
 export default DetailPage;
