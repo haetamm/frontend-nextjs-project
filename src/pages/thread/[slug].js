@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { AiFillSetting, AiFillLike } from 'react-icons/ai';
 import { BsFillChatTextFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import Layout from '../../../components/layout';
@@ -18,6 +18,7 @@ import ModalComp from '../../../components/utils/ModalComp';
 
 const DetailPage = () => {
   const { loggedIn } = useContext(AuthContext);
+  const targetRef = useRef(null);
   const [data, setData] = useState()
   const [likeColor, setLikeColor] = useState('text-gray-500');
   const router = useRouter();
@@ -85,14 +86,11 @@ const DetailPage = () => {
   };
 
   const handleGoBack = () => {
-    if (window.location.hash) {
-      router.back(); 
-      setTimeout(() => {
-        router.back(); 
-      }, 0);
-    } else {
-      router.back(); 
-    }
+    router.back(); 
+  };
+
+  const scrollToSection = () => {
+    targetRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const siteTitle = data ? `${getOverview(data?.title)} | The North` : 'not found';
@@ -139,10 +137,10 @@ const DetailPage = () => {
                       <span className="text-md font-medium text-blue-600 uppercase">Web Programming</span>
                       
                       <div className="flex items-center">
-                        <a href='#comment' className="text-md font-medium text-gray-500 flex flex-row items-center mr-5 cursor-pointer">
+                        <span onClick={scrollToSection} className="text-md font-medium text-gray-500 flex flex-row items-center mr-5 cursor-pointer">
                           <BsFillChatTextFill className='w-4 h-4 mr-1' />
                           <span>{data.comments?.length}</span>
-                        </a>
+                        </span>
 
                         <div onClick={loggedIn ? (event) => handleLikeThread(event, data.id) : undefined}
                           className={`text-md font-medium flex flex-row items-center cursor-pointer mr-5 ${likeColor}`}
@@ -189,7 +187,7 @@ const DetailPage = () => {
                       {ReactHtmlParser(data.body)}
                       {/* {data.body} */}
                     </div>
-                    <div id='comment'>
+                    <div ref={targetRef}>
                       <FormCommentComp threadId={data.id} loggedIn={loggedIn}/>
                     </div>
                   </article>
