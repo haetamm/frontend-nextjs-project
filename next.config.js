@@ -11,10 +11,10 @@ const nextConfig = {
       '/profile': { page: '/profile' },
       '/thread': { page: '/thread' },
       '/update': { page: '/update' },
-      '/[...username]': { page: '/[...username]' },
-      '/[...username]/likes': { page: '/[...username]/likes' },
+      '/[username]': { page: '/[username]' },
+      '/[username]/likes': { page: '/[username]/likes' },
       '/thread/[slug]': { page: '/thread/[slug]' },
-      '/update/[...threadSlug]': { page: '/update/[...threadSlug]' },
+      '/update/[threadSlug]': { page: '/update/[threadSlug]' },
     };
   },
   images: {
