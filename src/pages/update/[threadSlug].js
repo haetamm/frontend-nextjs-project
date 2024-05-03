@@ -34,7 +34,9 @@ const UpdateThreadPage = () => {
         setBody(response.data.thread.body);
         setThreadId(response.data.thread.id);
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 404) {
+          router.push('/home?page=1');  
+        }
       }
     };
 

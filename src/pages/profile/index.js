@@ -119,16 +119,20 @@ const ProfilePage = () => {
                                                     <div className="lg:col-span-2">
                                                         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                                             <div className="md:col-span-5">
-                                                                <input  placeholder="Name" readOnly className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 dark:focus:bg-gray-800 focus:outline-none " />
+                                                                <input  placeholder="Contoh nama" readOnly className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 dark:focus:bg-gray-800 focus:outline-none " />
                                                             </div>
 
                                                             <div className="md:col-span-5">
-                                                                <input value={formData.username} onChange={handleUsernameChange}placeholder="Old Username" className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400" />
+                                                                <input readOnly value={formData.username} onChange={handleUsernameChange}placeholder="Old Username" className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:outline-none focus:shadow-outline ring-offset-current ring-offset-2 ring-gray-400" />
                                                             </div>
-                                                            {errorMessages.username && <small style={{ color: 'red' }}>{errorMessages.username}</small>}
+                                                            {errorMessages.username && 
+                                                                <div className="md:col-span-5">
+                                                                    <p style={{ color: 'red' }}>{errorMessages.username}</p>
+                                                                </div>
+                                                            }
 
                                                             <div className="md:col-span-5 select-none">
-                                                                <input placeholder="Email Address" readOnly className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 dark:focus:bg-gray-800 focus:outline-none " />
+                                                                <input placeholder="contoh@gmail.com" readOnly className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 dark:focus:bg-gray-800 focus:outline-none " />
                                                             </div>
 
                                                             <div className="md:col-span-5">
@@ -151,7 +155,6 @@ const ProfilePage = () => {
                                                                 <label htmlFor="showHideCheckbox" className="ml-2">Show/Hide.</label>
                                                                 </div>
                                                             </div>
-
 
                                                             <div className="md:col-span-3">
                                                                 <input  placeholder="Address / Street" readOnly className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 dark:focus:bg-gray-800 focus:outline-none" />
@@ -190,13 +193,10 @@ const ProfilePage = () => {
                                                                     </button>
                                                                 </div>
                                                             </div>
-
                                                             
                                                             <div className="md:col-span-1">
                                                                 <input  placeholder="Zip Code" readOnly className="cursor-not-allowed text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 dark:focus:bg-gray-800 focus:outline-none" />
                                                             </div>
-
-                                                            
                                                         </div>
                                                     </div>
                                                 </div>
