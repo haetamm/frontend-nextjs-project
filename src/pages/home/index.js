@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Layout from '../../../components/layout';
 import endpoint from '../../../utils/api-endpoint';
 import StateContext from '../../../utils/StateContext';
 import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
+import { useRouter } from 'next/router';
 
 const HomePage = () => {
   const { loggedIn } = useContext(StateContext);
