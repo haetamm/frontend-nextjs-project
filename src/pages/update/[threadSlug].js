@@ -17,7 +17,7 @@ const UpdateThreadPage = () => {
   const router = useRouter();
   const { loggedIn } = useContext(StateContext);
   const editorRef = useRef(null);
-  const apiKey = 'bbdbvs8ddjjt5h08x24m74ubtouze5yhchljru4lflryii9q';
+
   const { threadSlug } = router.query;
 
   const [title, setTitle] = useState('');
@@ -98,7 +98,6 @@ const UpdateThreadPage = () => {
                 label="Content:"
                 id="body"
                 error={errorMessages.body}
-                apiKey={apiKey}
                 editorRef={editorRef}
                 value={body}
                 onChange={trimmedContent => setBody(trimmedContent)}

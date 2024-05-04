@@ -17,7 +17,6 @@ const CreateThreadPage = () => {
   
   const { loggedIn } = useContext(StateContext);
   const editorRef = useRef(null);
-  const apiKey = process.env.NEXT_PUBLIC_API_KEY_EDITOR;
 
   const [notif, setNotif] = useState('');
   const [title, setTitle] = useState('');
@@ -78,7 +77,6 @@ const CreateThreadPage = () => {
                 label="Content:"
                 id="body"
                 error={errorMessages.body}
-                apiKey={apiKey}
                 editorRef={editorRef}
                 value={body}
                 onChange={trimmedContent => setBody(trimmedContent)}
