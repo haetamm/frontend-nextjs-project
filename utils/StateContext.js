@@ -5,18 +5,7 @@ import Cookies from 'js-cookie';
 const StateContext = createContext();
 
 export function StateProvider({ children }) {
-  // const [token, _setToken] = useState(Cookies.get("token") ?? null);
   const [loggedIn, setLoggedIn] = useState(null);
-
-  const setToken = (newToken) => {
-    _setToken(newToken);
-
-    if (newToken) {
-      Cookies.set("token", newToken, { expires: 10080 }); // 1minggu
-    } else {
-      Cookies.remove("token");
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,8 +32,6 @@ export function StateProvider({ children }) {
 
   return (
     <StateContext.Provider value={{
-      // token,
-      // setToken,
       loggedIn,
       updateLoginStatus,
     }}>

@@ -6,10 +6,7 @@ import { useRouter } from 'next/router';
 import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
-import { useContext } from 'react';
-import StateContext from '../../../utils/StateContext';
 import Cookies from "js-cookie";
-
 
 
 const LoginPage = () => {
@@ -21,8 +18,6 @@ const LoginPage = () => {
 
     const bgColor = useBackgroundChange('bg-gradient-to-tr from-blue-300 to-slate-300', 400);
 
-    // const { setToken } = useContext(StateContext);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +28,6 @@ const LoginPage = () => {
                     withCredentials: true, 
                 });
                 Cookies.set("token", response.data.token, { expires: 10080 });
-                // setToken(response.data.token)
                 
                 sessionStorage.setItem('loginSuccess', formData.username);
                 router.reload();

@@ -1,40 +1,18 @@
-import { useContext, useEffect, useState  } from 'react';
+import { useContext } from 'react';
 import Layout from '../../../components/layout';
 import endpoint from '../../../utils/api-endpoint';
 import StateContext from '../../../utils/StateContext';
 import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
-import { useRouter } from 'next/router';
 
-const HomePage = () => {
+const HomePage = ({ data, totalPages }) => {
   const { loggedIn } = useContext(StateContext);
 
   const siteTitle = 'Home | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
-  const [data, setData] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
 
-
-  const router = useRouter();
-  const page = router.query.page
-
-
-
-  useEffect(() => {
-    const getThread = async () => {
-      try {
-        const response = await endpoint.get(`threads?page=${page || 1}`);
-        setData(response.data.threads.threads);
-        setTotalPages(response.data.threads.totalPages);
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    getThread();
-  }, [page])
 
   const { renderPagination } = usePagination(totalPages, '/home');
 
@@ -74,31 +52,30 @@ const HomePage = () => {
 };
 
 //  metode server side rendering
-// export const getServerSideProps = async ({ query }) => {
-//   try {
-//     const page = query.page || 1;
-//     const response = await endpoint.get(`threads?page=${page}`);
-//     const data = response.data.threads.threads;
-//     console.log(data)
-//     const totalPages = response.data.threads.totalPages;
+export const getServerSideProps = async ({ query }) => {
+  try {
+    const page = query.page || 1;
+    const response = await endpoint.get(`threads?page=${page}`);
+    const data = response.data.threads.threads;
+    const totalPages = response.data.threads.totalPages;
 
-//     return {
-//       props: {
-//         data,
-//         totalPages,
-//       },
-//     };
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
+    return {
+      props: {
+        data,
+        totalPages,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
 
-//     return {
-//       props: {
-//         data: [],
-//         totalPages: 1,
-//       },
-//     };
-//   }
-// };
+    return {
+      props: {
+        data: [],
+        totalPages: 1,
+      },
+    };
+  }
+};
 
 
 
