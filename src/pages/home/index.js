@@ -6,14 +6,33 @@ import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
 
-const HomePage = ({ data, totalPages }) => {
+const HomePage = () => {
   const { loggedIn } = useContext(StateContext);
 
   const siteTitle = 'Home | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
 
+  const [data, setData] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
 
+  const router = useRouter();
+  const page = router.query.page
+
+  useEffect(() => {
+    const getThread = async () => {
+      try {
+        const response = await endpoint.get(`threads?page=${page || 1}`);
+        setData(response.data.threads.threads);
+        setTotalPages(response.data.threads.totalPages);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getThread();
+  }, [page])
+  
   const { renderPagination } = usePagination(totalPages, '/home');
 
   return (
@@ -52,30 +71,30 @@ const HomePage = ({ data, totalPages }) => {
 };
 
 //  metode server side rendering
-export const getServerSideProps = async ({ query }) => {
-  try {
-    const page = query.page || 1;
-    const response = await endpoint.get(`threads?page=${page}`);
-    const data = response.data.threads.threads;
-    const totalPages = response.data.threads.totalPages;
+// export const getServerSideProps = async ({ query }) => {
+//   try {
+//     const page = query.page || 1;
+//     const response = await endpoint.get(`threads?page=${page}`);
+//     const data = response.data.threads.threads;
+//     const totalPages = response.data.threads.totalPages;
 
-    return {
-      props: {
-        data,
-        totalPages,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data:', error);
+//     return {
+//       props: {
+//         data,
+//         totalPages,
+//       },
+//     };
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
 
-    return {
-      props: {
-        data: [],
-        totalPages: 1,
-      },
-    };
-  }
-};
+//     return {
+//       props: {
+//         data: [],
+//         totalPages: 1,
+//       },
+//     };
+//   }
+// };
 
 
 
