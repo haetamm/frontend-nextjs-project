@@ -6,8 +6,10 @@ import { useRouter } from 'next/router';
 import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
-import { useContext, useEffect } from 'react';
-import AuthContext from '../../../utils/AuthContext';
+import { useContext } from 'react';
+import StateContext from '../../../utils/StateContext';
+import Cookies from "js-cookie";
+
 
 
 const LoginPage = () => {
@@ -19,13 +21,8 @@ const LoginPage = () => {
 
     const bgColor = useBackgroundChange('bg-gradient-to-tr from-blue-300 to-slate-300', 400);
 
-    const { loggedIn } = useContext(AuthContext);
+    // const { setToken } = useContext(StateContext);
 
-    useEffect(() => {
-        if (loggedIn) {
-            router.push('/home');
-        }
-    }, [loggedIn, router]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,11 +32,11 @@ const LoginPage = () => {
                 const response = await endpoint.post('auth', formData, {
                     withCredentials: true, 
                 });
-
+                Cookies.set("token", response.data.token, { expires: 10080 });
+                // setToken(response.data.token)
                 
                 sessionStorage.setItem('loginSuccess', formData.username);
                 router.reload();
-                router.push('/home?page=1');        
                 setFormData({
                     username: '',
                     password: ''

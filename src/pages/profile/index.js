@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import AuthContext from '../../../utils/AuthContext';
+import StateContext from '../../../utils/StateContext';
 import Layout from '../../../components/layout';
 import SideBarUser from '../../../components/home/SideBarUser';
 import endpoint from '../../../utils/api-endpoint';
@@ -14,18 +14,12 @@ const ProfilePage = () => {
     const siteDescription =
         'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
     const router = useRouter();
-    const { loggedIn } = useContext(AuthContext);
+    const { loggedIn } = useContext(StateContext);
     const [oldPassword, setOldPassword] = useState('');
     const [newUsername, setNewUsername] = useState('');
     const [showPassNew, setShowPassNew] = useState(false);
 
     const { showPassword, toggleShowPassword, formData, errorMessages, setFormData, setErrorMessages, handleErrorResponse } = useForm();
-
-    useEffect(() => {
-      if (!loggedIn || null) {
-          router.push('/guest/login');
-      }
-    }, [loggedIn, router]);
 
     useEffect(() => {
         const getThread = async () => {
@@ -96,7 +90,7 @@ const ProfilePage = () => {
       
     return (
         <Layout guest={!loggedIn} siteTitle={siteTitle} siteDescription={siteDescription}>
-            <div className="flex w-full justify-center gap-0">
+            <div className="flex w-full justify-center gap-0 h-screen">
                 {loggedIn && <SideBarUser />}
 
                 <div className="bg-slate-200 rounded-none xs:rounded-tl-[10rem] xs:rounded-tr-[10rem] hover-animation flex min-h-screen w-full max-w-full flex-col mx-auto border-x-0 border-light-border pb-[18rem] dark:border-dark-border xs:border-x">

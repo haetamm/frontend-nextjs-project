@@ -8,13 +8,13 @@ import handleLogout from '../../utils/handleLogout';
 import DropdownUser from './DropdownUser';
 import {IoMdNotifications} from 'react-icons/io';
 import { useContext } from 'react';
-import AuthContext from '../../utils/AuthContext';
+import StateContext from '../../utils/StateContext';
 
 
 
 const SideBarUser = () => {
     const router = useRouter();
-    const { loggedIn } = useContext(AuthContext);
+    const { loggedIn } = useContext(StateContext);
     const threadClassName = router.pathname === '/[username]' ? "text-indigo-700" : "text-white"  ;
 
     const resetPage = () => {

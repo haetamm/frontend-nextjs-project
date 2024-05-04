@@ -24,7 +24,7 @@ export function isoToWIB(isoTime) {
 
 
 export function getOverview(body) {
-  console.log(body);
+  // console.log(body);
   const strippedText = body.replace(/<[^>]+>/g, ''); // Menghapus tag HTML
   const strippedTextWithoutLineBreaks = strippedText.replace(/(\r\n|\n|\r)/gm, ''); // Menghapus baris baru
 

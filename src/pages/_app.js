@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { AuthProvider } from '../../utils/AuthContext';
+import { StateProvider } from '../../utils/StateContext';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { notificationHelper } from '../../utils/notificationHelper';
@@ -33,9 +33,9 @@ export default function App({ Component, pageProps }) {
           pauseOnHover
           theme="light"
         />
-      <AuthProvider>
+      <StateProvider>
         <Component {...pageProps} />
-      </AuthProvider>
+      </StateProvider>
     
     </>
   )

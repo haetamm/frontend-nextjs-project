@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from 'react';
-import AuthContext from "../../utils/AuthContext";
+import StateContext from "../../utils/StateContext";
 
 
 const NavUserPageComp = () => {
     const router = useRouter();
     const { username } = router.query;
-    const { loggedIn } = useContext(AuthContext);
+    const { loggedIn } = useContext(StateContext);
     const classActive = "bg-white rounded-tl-lg rounded-tr-lg border-l border-t border-r border-gray-100";
 
     return (
@@ -15,7 +15,7 @@ const NavUserPageComp = () => {
             <Link href={{ pathname: `/${loggedIn?.user?.username}` }}>
                 <div href="#page1" className={`${router.pathname == '/[username]' ? classActive : '' } flex justify-center py-4`}>My Thread</div>    
             </Link>    
-            <Link href={{ pathname: `/${username}/likes`, query: { page: 1 } }}>
+            <Link href={{ pathname: `/${loggedIn?.user?.username}/likes`, query: { page: 1 } }}>
                 <div className={`${router.pathname === `/[username]/likes` ? classActive : ''} flex justify-center py-4`}>
                     My Likes
                 </div>

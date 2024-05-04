@@ -1,6 +1,6 @@
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { useRouter } from 'next/router';
-import AuthContext from '../../../utils/AuthContext';
+import StateContext from '../../../utils/StateContext';
 import Layout from '../../../components/layout';
 import SideBarUser from '../../../components/home/SideBarUser';
 import endpoint from '../../../utils/api-endpoint';
@@ -16,7 +16,7 @@ const CreateThreadPage = () => {
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
   const router = useRouter();
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn } = useContext(StateContext);
   const editorRef = useRef(null);
   const apiKey = 'bbdbvs8ddjjt5h08x24m74ubtouze5yhchljru4lflryii9q';
 
@@ -56,12 +56,6 @@ const CreateThreadPage = () => {
         }
     }
   };
-
-  useEffect(() => {
-    if (!loggedIn || null) {
-      router.push('/guest/login');
-    }
-  }, [loggedIn, router]);
 
 
   return (

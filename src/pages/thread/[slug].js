@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import { AiFillSetting, AiFillLike } from 'react-icons/ai';
 import { BsFillChatTextFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import Layout from '../../../components/layout';
-import AuthContext from '../../../utils/AuthContext';
+import StateContext from '../../../utils/StateContext';
 import SideBarUser from '../../../components/home/SideBarUser';
 import FormCommentComp from '../../../components/thread/FormCommentComp';
 import endpoint from '../../../utils/api-endpoint';
@@ -17,9 +17,9 @@ import ModalComp from '../../../components/utils/ModalComp';
 
 
 const DetailPage = () => {
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, authReady } = useContext(StateContext);
   const targetRef = useRef(null);
-  const [data, setData] = useState()
+  const [data, setData] = useState(null)
   const [likeColor, setLikeColor] = useState('text-gray-500');
   const router = useRouter();
   const { slug } = router.query;
@@ -39,18 +39,20 @@ const DetailPage = () => {
             setData(null);
           }
         } catch (error) {
-          console.log(error);
+          if (error.response.status === 404) {
+            setNotfound(true);
+          }
         }
       }
     getThreadBySlug()
   }, [slug]);
 
   useEffect(() => {
-    if (loggedIn) {
+    if (authReady && loggedIn) {
       const initialLikeColor = getInitialLikeColor(data, loggedIn);
       setLikeColor(initialLikeColor);
     }
-  }, [data, loggedIn]);
+  }, [authReady, data, loggedIn]);
 
   const handleLikeThread = async (e, threadId) => {
     try {

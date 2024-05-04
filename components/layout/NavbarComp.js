@@ -8,7 +8,7 @@ import { AiOutlineCompass } from 'react-icons/ai';
 import DropdownComp from './DropdownComp';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import AuthContext from '../../utils/AuthContext';
+import AuthContext from '../../utils/StateContext';
 import { useContext } from 'react';
 
 

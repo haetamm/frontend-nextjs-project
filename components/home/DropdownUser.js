@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { AiOutlineLogout } from 'react-icons/ai';
-import AuthContext from '../../utils/AuthContext';
+import AuthContext from '../../utils/StateContext';
 import Link from 'next/link';
 import ModalComp from '../utils/ModalComp';
 

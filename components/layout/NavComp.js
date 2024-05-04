@@ -5,7 +5,7 @@ import SIdebarComp from './SIdebarComp';
 import NavbarComp from './NavbarComp';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import AuthContext from '../../utils/AuthContext';
+import AuthContext from '../../utils/StateContext';
 import { useContext } from 'react';
 import handleLogout from '../../utils/handleLogout';
 import useScroll from '../../utils/useScrollHandler';
@@ -17,7 +17,7 @@ const NavComp = ({ children, guest }) => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
-    const { loggedIn } = useContext(AuthContext);
+    const { loggedIn, token } = useContext(AuthContext);
     const { visible, transparent } = useScroll();
 
     const toggleSidebar = () => {

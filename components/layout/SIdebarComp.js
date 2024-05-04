@@ -10,7 +10,7 @@ import { IoIosNotificationsOutline } from 'react-icons/io';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import AuthContext from '../../utils/AuthContext';
+import AuthContext from '../../utils/StateContext';
 import { useContext } from 'react';
 
 const SIdebarComp = ({ showSIdebar }) => {

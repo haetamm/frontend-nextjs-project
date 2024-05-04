@@ -4,7 +4,7 @@ import FooterComp from './FooterComp';
 import { useEffect, useContext } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { notificationHelper } from '../../utils/notificationHelper';
-import AuthContext from '../../utils/AuthContext';
+import AuthContext from '../../utils/StateContext';
 
 const Index = ({ children, siteTitle, siteDescription, guest }) => {
   const { loggedIn } = useContext(AuthContext);

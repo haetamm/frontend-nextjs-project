@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import { useForm } from '../../../utils/validationUser';
 import FormComp from '../../../components/guest/FormComp';
 import endpoint from '../../../utils/api-endpoint';
-import { useContext, useEffect } from 'react';
-import AuthContext from '../../../utils/AuthContext'; 
 
 
 const RegisterPage = () => {
@@ -16,13 +14,6 @@ const RegisterPage = () => {
     const { isFormValid, showPassword, formData, errorMessages, handleInputChange, toggleShowPassword, setFormData, setErrorMessages, setIsFormValid, handleErrorResponse } = useForm();
     const router = useRouter();
     const bgColor = useBackgroundChange('bg-gradient-to-tr from-blue-300 to-slate-300', 400);
-
-    const { loggedIn } = useContext(AuthContext);
-    useEffect(() => {
-        if (loggedIn) {
-            router.push('/home');
-        }
-    }, [loggedIn, router]);
     
     const handleSubmit = async (e) => {
         e.preventDefault();

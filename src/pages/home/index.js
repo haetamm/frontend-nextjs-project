@@ -1,25 +1,21 @@
 import { useContext, useEffect, useState  } from 'react';
 import Layout from '../../../components/layout';
 import endpoint from '../../../utils/api-endpoint';
-import AuthContext from '../../../utils/AuthContext';
+import StateContext from '../../../utils/StateContext';
 import ArticleComp from '../../../components/home/ArticleComp';
 import SideBarUser from '../../../components/home/SideBarUser';
 import usePagination from '../../../utils/usePagination';
 import { useRouter } from 'next/router';
 
-export const config = {
-  runtime: 'nodejs', // or "edge"
-}
-
-
 const HomePage = () => {
+  const { loggedIn } = useContext(StateContext);
+
   const siteTitle = 'Home | The North';
   const siteDescription =
     'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?';
   const [data, setData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
 
-  const { loggedIn } = useContext(AuthContext);
 
   const router = useRouter();
   const page = router.query.page

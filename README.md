@@ -1,7 +1,7 @@
 # Project Nextjs | Tailwind
 
 Frontend => [disini](https://the-north.netlify.app/)
-Backend => [disini](https://github.com/THaetami/expressjs-typescript-api/tree/exploration1)
+Backend => [disini](https://github.com/THaetami/expressjs-typescript-api/tree/trying-deploy-in-vercel)
 
 ## project setup
 

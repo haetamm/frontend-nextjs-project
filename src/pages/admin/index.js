@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import Layout from '../../../components/layout';
-import AuthContext from '../../../utils/AuthContext';
+import StateContext from '../../../utils/StateContext';
 import SideBarUser from '../../../components/home/SideBarUser';
 import { useRouter } from 'next/router';
 import TableUserComp from '../../../components/admin/TableUserComp';
@@ -8,7 +8,7 @@ import endpoint from '../../../utils/api-endpoint';
 import Error403Comp from '../../../components/admin/Error403Comp';
 
 const Admin = () => {
-    const { loggedIn } = useContext(AuthContext);
+    const { loggedIn } = useContext(StateContext);
     const siteTitle = `${loggedIn?.is_admin ? 'Admin | The North' : 'Error Forbidden'}`;
     const siteDescription =
         `${loggedIn?.is_admin ? 'Lorem ipsum dolor sit amet consectetur a doloremque fugit cumque eaque impedit nesciunt quidem obcaecati?' : 'Error Forbidden'}`;
@@ -19,12 +19,6 @@ const Admin = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
   
-
-    useEffect(() => {
-        if (!loggedIn || null) {
-            router.push('/guest/login');
-        }
-    }, [loggedIn, router]);
 
     const handlePageChange = (page) => {
         window.scrollTo(0, 0);
