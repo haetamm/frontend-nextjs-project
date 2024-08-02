@@ -5,13 +5,6 @@ const NotFoundComp = () => {
         <link rel="stylesheet" href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css"/>
         <div className="mt-6 md:mt-0">
             <div className="flex flex-col">
-                <span className="text-center font-bold my-10 opacity-30 hidden md:block">
-                    MDI (npm i @mdi/font) reuqired for all icons
-                    <hr className="my-4"/>
-                    <a href="https://egoistdeveloper.github.io/twcss-to-sass-playground/" target="_blank" className="text-blue-600">
-                        Convetert to SASS
-                    </a>
-                </span>
                 <div className="flex flex-col items-center">
                     <div className="text-indigo-500 font-bold text-7xl">
                         404

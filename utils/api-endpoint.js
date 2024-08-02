@@ -2,7 +2,8 @@ const axios = require('axios').default;
 import Cookies from "js-cookie";
 
 
-axios.defaults.baseURL = "http://localhost:8000/api/v1/";
+// axios.defaults.baseURL = "http://localhost:8000/api/v1/";
+axios.defaults.baseURL = "https://thnorth.up.railway.app/api/v1/";
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use((config) => {

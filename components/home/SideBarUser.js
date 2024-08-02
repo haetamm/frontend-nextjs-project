@@ -1,6 +1,6 @@
 import { FaHome } from 'react-icons/fa';
 import { RiBook2Fill } from 'react-icons/ri';
-import { AiOutlineFileSearch, AiFillBook } from 'react-icons/ai';
+import { AiOutlineFileSearch } from 'react-icons/ai';
 import { IoMdCreate } from 'react-icons/io';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -15,7 +15,7 @@ import StateContext from '../../utils/StateContext';
 const SideBarUser = () => {
     const router = useRouter();
     const { loggedIn } = useContext(StateContext);
-    const threadClassName = router.pathname === '/[username]' ? "text-indigo-700" : "text-white"  ;
+    const threadClassName = router.pathname === '/my/[username]' || router.pathname === '/my/[username]/likes' ? "text-indigo-700" : "text-white"  ;
 
     const resetPage = () => {
         router.pathname === '/home' ? sessionStorage.setItem('currentPageHome', 1) : sessionStorage.setItem('currentPageUser', 1);
@@ -54,7 +54,7 @@ const SideBarUser = () => {
                                 <p className="hidden xl:block">Notifications</p>
                             </div>
                         </a>
-                        <Link href={{ pathname: `/${loggedIn.user?.username}` }} onClick={router.pathname == '/[username]' ? resetPage : undefined} className="group py-1 outline-none flex cursor-pointer group">
+                        <Link href={{ pathname: `/my/${loggedIn.user?.username}` }} onClick={router.pathname == '/my/[username]' ? resetPage : undefined} className="group py-1 outline-none flex cursor-pointer group">
                             <div className={`${threadClassName} custom-button flex items-center justify-center gap-4 self-start p-2 text-xl xs:p-3 xl:pr-5`}>
                                 <RiBook2Fill className='h-7 w-7' />
                                 <p className="hidden xl:block">Threads</p>

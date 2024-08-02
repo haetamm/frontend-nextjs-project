@@ -40,7 +40,7 @@ const DetailPage = () => {
           }
         } catch (error) {
           if (error.response.status === 404) {
-            setNotfound(true);
+            // setNotfound(true);
           }
         }
       }
@@ -97,6 +97,7 @@ const DetailPage = () => {
 
   const siteTitle = data ? `${getOverview(data?.title)} | The North` : 'not found';
   const siteDescription = data ? ReactHtmlParser(getOverview(data?.body)) : 'not found';
+
   return (
     <Layout guest={!loggedIn} siteTitle={siteTitle} siteDescription={siteDescription}>
       <div className="flex w-full justify-center gap-0">

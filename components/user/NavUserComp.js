@@ -12,11 +12,11 @@ const NavUserPageComp = () => {
 
     return (
         <ul className="grid grid-flow-col text-center text-gray-500  p-1">    
-            <Link href={{ pathname: `/${loggedIn?.user?.username}` }}>
-                <div href="#page1" className={`${router.pathname == '/[username]' ? classActive : '' } flex justify-center py-4`}>My Thread</div>    
+            <Link href={{ pathname: `/my/${loggedIn?.user?.username}` }}>
+                <div href="#page1" className={`${router.pathname == '/my/[username]' ? classActive : '' } flex justify-center py-4`}>My Thread</div>    
             </Link>    
-            <Link href={{ pathname: `/${loggedIn?.user?.username}/likes`, query: { page: 1 } }}>
-                <div className={`${router.pathname === `/[username]/likes` ? classActive : ''} flex justify-center py-4`}>
+            <Link href={{ pathname: `/my/${loggedIn?.user?.username}/likes`, query: { page: 1 } }}>
+                <div className={`${router.pathname === `/my/[username]/likes` ? classActive : ''} flex justify-center py-4`}>
                     My Likes
                 </div>
             </Link>

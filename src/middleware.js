@@ -23,5 +23,5 @@ export const middleware = (req) => {
 }
 
 export const config = {
-    matcher: ["/profile", "/admin", "/create", "/update/:path*", "/guest/login", "/guest/register"]
+    matcher: ["/profile", "/admin", "/create", "/update/:path*", "/guest/login", "/guest/register", "/my/:path*"]
 }
