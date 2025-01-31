@@ -1,7 +1,7 @@
 # Project Nextjs | Tailwind
 
 Frontend => [disini](https://thenorth.vercel.app/)
-Backend => [disini](https://github.com/THaetami/expressjs-typescript-api/tree/trying-deploy-in-vercel)
+Backend => [disini](https://github.com/haetamm/thenorth-api)
 
 ## project setup
 
