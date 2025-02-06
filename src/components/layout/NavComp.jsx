@@ -9,7 +9,7 @@ const NavComp = ({ children, guest }) => {
   const { visible, transparent } = useScroll();
 
   return (
-    <div className=" w-full z-10">
+    <div className=" w-full z-10  ">
       <GuestNavbar guest={guest} />
       <div
         className={` ${

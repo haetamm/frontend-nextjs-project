@@ -27,6 +27,7 @@ const useUserStore = create((set) => ({
   guest: false,
   loadingUpdate: false,
   error: null,
+  loadingFetch: false,
 
   setGuest: (guest) => {
     set({ guest });
@@ -81,7 +82,7 @@ const useUserStore = create((set) => ({
   },
 
   fetchUser: async () => {
-    set({ loading: true, error: null });
+    set({ loadingFetch: true, error: null });
     try {
       const { data: response } = await axiosInstance.get("users/me");
       const { data: user } = response;
@@ -89,7 +90,7 @@ const useUserStore = create((set) => ({
     } catch (error) {
       handleFormErrors(error);
     } finally {
-      set({ loading: false });
+      set({ loadingFetch: false });
     }
   },
 }));

@@ -8,7 +8,7 @@ const FooterComp = ({ guest }) => {
   return (
     <>
       {!token || guest ? (
-        <div className={` relative mt-2 bg-blue-300`}>
+        <div className={` relative mt-2 bg-blue-300 `}>
           <svg
             className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-blue-300"
             preserveAspectRatio="none"

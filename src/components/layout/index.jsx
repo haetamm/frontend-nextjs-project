@@ -9,7 +9,7 @@ import Modal from "./Modal";
 import Loader from "./Loader";
 
 const Index = ({ children, siteTitle, siteDescription, guestToken }) => {
-  const { loading, username, fetchUser, token } = useUserStore();
+  const { loadingFetch, username, fetchUser, token } = useUserStore();
   const [guest, setGuest] = useState(guestToken || false);
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const Index = ({ children, siteTitle, siteDescription, guestToken }) => {
 
   return (
     <>
-      {loading && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+      {loadingFetch && (
+        <div className="fixed top-0 left-0 w-full h-full bg-blue-200 bg-opacity-50 flex items-center justify-center z-50">
           <div className="text-white text-lg font-semibold">
             <Loader />
           </div>
@@ -41,12 +41,11 @@ const Index = ({ children, siteTitle, siteDescription, guestToken }) => {
           theme="light"
         />
         <HeadComp siteTitle={siteTitle} siteDescription={siteDescription} />
-        <NavComp guest={guest}>
-          <div className="h-[46px] md:h-[56px]"></div>
-          <div className="kontener mx-auto">{children}</div>
-        </NavComp>
+        <NavComp guest={guest} />
+        <div className="h-[46px] md:h-[56px]"></div>
+        <div className="kontener mx-auto flex-grow ">{children}</div>
+        <FooterComp guest={guest} />
       </div>
-      <FooterComp guest={guest} />
       <SidebarComp />
       <Modal />
     </>
